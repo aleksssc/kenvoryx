@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
@@ -9,6 +8,11 @@ type BrandLogoProps = {
   preload?: boolean;
 };
 
+/**
+ * Public-facing KenvoryX identity.
+ * Legacy SentinelGrid asset names are deliberately left in the repository for
+ * compatibility with already-shipped Windows installers and signing scripts.
+ */
 export function BrandLogo({
   variant = "mark",
   className,
@@ -21,9 +25,9 @@ export function BrandLogo({
         aria-hidden={decorative ? true : undefined}
         className={cn("inline-flex shrink-0 items-center gap-2.5", className)}
       >
-        <BrandLogo decorative preload={preload} className="h-9 w-8" />
-        <span className="whitespace-nowrap text-[18px] font-semibold leading-none tracking-[-0.04em] text-zinc-100">
-          Ken<span className="font-normal text-zinc-400">voryx</span>
+        <BrandLogo decorative preload={preload} className="h-9 w-9" />
+        <span className="whitespace-nowrap text-[18px] font-semibold leading-none tracking-[-0.045em] text-zinc-100">
+          Kenvory<span className="bg-gradient-to-br from-cyan-300 to-blue-500 bg-clip-text text-transparent">X</span>
         </span>
       </span>
     );
@@ -33,28 +37,25 @@ export function BrandLogo({
     return (
       <span
         aria-hidden={decorative ? true : undefined}
-        className={cn("inline-flex shrink-0 items-center whitespace-nowrap text-[24px] font-semibold leading-none tracking-[-0.04em] text-zinc-100", className)}
+        className={cn(
+          "inline-flex shrink-0 items-center whitespace-nowrap text-[24px] font-semibold leading-none tracking-[-0.04em] text-zinc-100",
+          className,
+        )}
       >
-        Kenvoryx
+        Kenvory<span className="bg-gradient-to-br from-cyan-300 to-blue-500 bg-clip-text text-transparent">X</span>
       </span>
     );
   }
 
-  const isMark = variant === "mark";
-
   return (
     <Image
-      src={`/logos/sentinelgrid-${variant}.svg`}
-      alt={decorative ? "" : "Kenvoryx"}
-      width={isMark ? 320 : 800}
-      height={isMark ? 384 : 160}
+      src="/logos/kenvoryx-mark.svg"
+      alt={decorative ? "" : "KenvoryX"}
+      width={350}
+      height={365}
       preload={preload}
       unoptimized
-      className={cn(
-        "shrink-0 object-contain",
-        isMark ? "h-8 w-8" : "h-auto w-36",
-        className,
-      )}
+      className={cn("shrink-0 object-contain h-8 w-8", className)}
     />
   );
 }

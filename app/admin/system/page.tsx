@@ -34,7 +34,7 @@ export default async function AdminSystemPage() {
 
   const checks = [
     {
-      name: "SentinelGrid application",
+      name: "Kenvoryx application",
       detail: "This administration request is being served.",
       status: "Healthy",
       tone: "success" as const,

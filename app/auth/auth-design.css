@@ -359,6 +359,44 @@
   transition: color .2s ease;
 }
 .kv-auth-footer a:hover { color: #c4f5ff; }
+.kv-auth-success {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+.kv-auth-status-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(45, 203, 229, .27);
+  border-radius: 18px;
+  color: #5bdcf1;
+  background: rgba(9, 121, 196, .11);
+  box-shadow: 0 0 20px rgba(12, 165, 235, .08);
+}
+.kv-auth-success-title {
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: #f2f7ff;
+}
+.kv-auth-success-description {
+  max-width: 23rem;
+  margin-bottom: 12px;
+  color: #9baac3;
+  font-size: .875rem;
+  line-height: 1.65;
+}
+.kv-auth-return-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 @keyframes kv-auth-arrive {
   from { opacity: 0; transform: translateY(20px) scale(.985); }
   to { opacity: 1; transform: translateY(0) scale(1); }

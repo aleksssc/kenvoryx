@@ -36,10 +36,10 @@ const renderLogo = (props) => renderToStaticMarkup(React.createElement(BrandLogo
 
 test("KenvoryX lockup has one new symbol and a single-line branded wordmark", () => {
   const html = renderLogo({ variant: "lockup" });
-  assert.equal((html.match(/<img\\b/g) ?? []).length, 1);
+  assert.equal((html.match(/<img\b/g) ?? []).length, 1);
   assert.match(html, /alt=""/);
-  assert.match(html, /src="\\/logos\\/kenvoryx-mark\\.svg"/);
-  assert.match(html, /Kenvory<span[^>]*>X<\\/span>/);
+  assert.match(html, /src="\/logos\/kenvoryx-mark\.svg"/);
+  assert.match(html, /Kenvory<span[^>]*>X<\/span>/);
   assert.doesNotMatch(html, /SentinelGrid|sentinelgrid-mark/);
   assert.match(renderLogo({ variant: "lockup", decorative: true }), /^<span aria-hidden="true"/);
 });
@@ -50,7 +50,7 @@ test("mark and wordmark preserve accessible naming and class overrides", () => {
   assert.match(mark, /width="350" height="365"/);
   assert.match(mark, /class="shrink-0 object-contain h-8 w-8 h-9 w-9"/);
   const wordmark = renderLogo({ variant: "wordmark" });
-  assert.match(wordmark, /Kenvory<span[^>]*>X<\\/span>/);
+  assert.match(wordmark, /Kenvory<span[^>]*>X<\/span>/);
   assert.match(renderLogo({ decorative: true }), /alt=""/);
 });
 
@@ -88,6 +88,6 @@ test("website, auth and dashboard use the shared logo component", async () => {
     "components/dashboard/dashboard-sidebar.tsx",
   ]) {
     const source = (await read(path)).toString();
-    assert.match(source, /<BrandLogo\\b/, path);
+    assert.match(source, /<BrandLogo\b/, path);
   }
 });

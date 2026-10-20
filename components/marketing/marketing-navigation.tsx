@@ -2,17 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronRight,
+  CreditCard,
+  House,
+  Info,
+  Layers3,
+  Menu,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { BrandLogo } from "@/components/brand-logo";
 import "./marketing-navigation.css";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/features", label: "Features" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/security", label: "Security" },
-  { href: "/about", label: "About" },
+  { href: "/", label: "Home", icon: House },
+  { href: "/features", label: "Features", icon: Layers3 },
+  { href: "/pricing", label: "Pricing", icon: CreditCard },
+  { href: "/security", label: "Security", icon: ShieldCheck },
+  { href: "/about", label: "About", icon: Info },
 ] as const;
 
 type Indicator = { left: number; width: number };
@@ -22,9 +32,10 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [indicator, setIndicator] = useState<Indicator | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const desktopNav = useRef<HTMLElement>(null);
   const mobileButton = useRef<HTMLButtonElement>(null);
-  const firstMobileLink = useRef<HTMLAnchorElement>(null);
+  const mobilePanel = useRef<HTMLDivElement>(null);
 
   const activeHref = links.find((link) =>
     link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(`${link.href}/`)
@@ -32,7 +43,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
 
   const highlightedHref = hovered ?? activeHref;
 
-  // Measure the indicator before paint so a route change never flashes its old position.
+  // Preserve the smoothly moving desktop indicator; measure before paint to avoid a route-change bounce.
   useLayoutEffect(() => {
     const nav = desktopNav.current;
     if (!nav) return;
@@ -56,7 +67,6 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
       frame = window.requestAnimationFrame(positionIndicator);
     };
 
-    // Synchronous layout measurement prevents a one-frame flash on route changes.
     positionIndicator();
     const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(scheduleMeasure);
     observer?.observe(nav);
@@ -68,7 +78,6 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
     };
   }, [highlightedHref]);
 
-  // End any transient hover after navigation. The active route takes over at the same location.
   useEffect(() => {
     setHovered(null);
     setMobileOpen(false);
@@ -76,21 +85,34 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
 
   useEffect(() => {
     if (!mobileOpen) return;
-    firstMobileLink.current?.focus({ preventScroll: true });
+    // Focus the panel, not the first link: prevents the unwanted bright outline around Home.
+    mobilePanel.current?.focus({ preventScroll: true });
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMobileOpen(false);
         mobileButton.current?.focus({ preventScroll: true });
       }
     };
+
+    const onOutsidePointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setMobileOpen(false);
+      }
+    };
+
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onOutsidePointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onOutsidePointerDown);
+    };
   }, [mobileOpen]);
 
   const closeMobile = () => setMobileOpen(false);
 
   return (
-    <header className="kv-site-header">
+    <header ref={headerRef} className="kv-site-header" data-mobile-open={mobileOpen}>
       <div className="kv-header-inner">
         <Link href="/" className="kv-header-brand" aria-label="KenvoryX — Home" onClick={closeMobile}>
           <BrandLogo variant="lockup" />
@@ -112,13 +134,12 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
               key={link.href}
               href={link.href}
               data-nav-href={link.href}
-              aria-current={pathname === link.href ? "page" : undefined}
+              aria-current={activeHref === link.href ? "page" : undefined}
               data-highlighted={highlightedHref === link.href ? "true" : undefined}
               className="kv-nav-link"
               onPointerEnter={(event) => { if (event.pointerType !== "touch") setHovered(link.href); }}
               onFocus={() => setHovered(link.href)}
               onBlur={() => setHovered(null)}
-              // Keep the pill on the clicked link until pathname catches up; do not bounce to the previous route.
               onClick={() => setHovered(link.href)}
             >
               {link.label}
@@ -136,25 +157,48 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((previous) => !previous)}
         >
-          {mobileOpen ? <X size={21} /> : <Menu size={21} />}
+          {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
         </button>
       </div>
 
-      <div id="kv-mobile-menu" className="kv-mobile-menu" hidden={!mobileOpen}>
-        <nav aria-label="Mobile navigation">
-          {links.map((link, index) => (
-            <Link
-              ref={index === 0 ? firstMobileLink : undefined}
-              key={link.href}
-              href={link.href}
-              className="kv-mobile-link"
-              aria-current={pathname === link.href ? "page" : undefined}
-              onClick={closeMobile}
-            >
-              {link.label}
-            </Link>
-          ))}
+      <div
+        ref={mobilePanel}
+        id="kv-mobile-menu"
+        className="kv-mobile-menu"
+        data-open={mobileOpen}
+        aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
+        tabIndex={-1}
+      >
+        <div className="kv-mobile-menu-heading">
+          <span>Explore KenvoryX</span>
+          <ArrowUpRight size={14} aria-hidden="true" />
+        </div>
+
+        <nav className="kv-mobile-nav" aria-label="Mobile navigation">
+          {links.map((link, index) => {
+            const ItemIcon = link.icon;
+            const isActive = activeHref === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="kv-mobile-link"
+                data-active={isActive}
+                style={{ animationDelay: `${index * 35}ms` }}
+                aria-current={isActive ? "page" : undefined}
+                onClick={closeMobile}
+              >
+                <span className="kv-mobile-link-icon"><ItemIcon size={18} aria-hidden="true" /></span>
+                <span className="kv-mobile-link-label">{link.label}</span>
+                {isActive
+                  ? <span className="kv-mobile-active-dot" aria-hidden="true" />
+                  : <ChevronRight className="kv-mobile-chevron" size={16} aria-hidden="true" />}
+              </Link>
+            );
+          })}
         </nav>
+
         <div className="kv-mobile-auth">{auth}</div>
       </div>
     </header>

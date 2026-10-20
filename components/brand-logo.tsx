@@ -23,8 +23,19 @@ export function BrandLogo({
       >
         <BrandLogo decorative preload={preload} className="h-9 w-8" />
         <span className="whitespace-nowrap text-[18px] font-semibold leading-none tracking-[-0.04em] text-zinc-100">
-          Sentinel<span className="font-normal text-zinc-400">Grid</span>
+          Ken<span className="font-normal text-zinc-400">voryx</span>
         </span>
+      </span>
+    );
+  }
+
+  if (variant === "wordmark") {
+    return (
+      <span
+        aria-hidden={decorative ? true : undefined}
+        className={cn("inline-flex shrink-0 items-center whitespace-nowrap text-[24px] font-semibold leading-none tracking-[-0.04em] text-zinc-100", className)}
+      >
+        Kenvoryx
       </span>
     );
   }

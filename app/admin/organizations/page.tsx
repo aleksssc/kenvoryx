@@ -81,7 +81,7 @@ export default async function AdminOrganizationsPage() {
       <AdminPageHeader
         eyebrow="Management"
         title="Organizations"
-        description={`${inventory.length} organization${inventory.length === 1 ? "" : "s"} across SentinelGrid.`}
+        description={`${inventory.length} organization${inventory.length === 1 ? "" : "s"} across Kenvoryx.`}
       />
 
       <AdminSection

@@ -34,7 +34,7 @@ export function BrandLogo({
   return (
     <Image
       src={`/logos/sentinelgrid-${variant}.svg`}
-      alt={decorative ? "" : "SentinelGrid"}
+      alt={decorative ? "" : "Kenvoryx"}
       width={isMark ? 320 : 800}
       height={isMark ? 384 : 160}
       preload={preload}

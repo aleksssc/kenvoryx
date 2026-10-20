@@ -20,7 +20,7 @@ export default function AuthLayout({
 
       <header className="kv-auth-topbar">
         <div className="kv-auth-topbar-inner">
-          <Link href="/" aria-label="KenvoryX home">
+          <Link href="/" className="kv-auth-brand" aria-label="KenvoryX home">
             <BrandLogo variant="lockup" />
           </Link>
           <Link href="/" className="kv-auth-back">

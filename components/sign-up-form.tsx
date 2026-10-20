@@ -8,6 +8,9 @@ import {
   EyeOff,
   Loader2,
   UserPlus,
+  UserRound,
+  Mail,
+  LockKeyhole,
 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
@@ -83,310 +86,127 @@ export function SignUpForm() {
   }
 
   return (
-    <div>
-      {/* HEADER */}
-
-      <div className="mb-8 text-center">
-
-        <div className="mb-3 text-sm font-medium text-emerald-400">
-          Create your account
-        </div>
-
-        <h1 className="text-3xl font-bold tracking-tight">
-          Join KenvoryX
+    <div className="kv-auth-page kv-auth-page-signup">
+      <div className="kv-auth-heading">
+        <span className="kv-auth-eyebrow">Create your account</span>
+        <h1 className="kv-auth-title">
+          Join Kenvory<span className="kv-auth-title-accent">X</span>
         </h1>
-
-        <p className="mt-2 text-sm text-zinc-500">
-          Start monitoring your infrastructure
-          from one place.
+        <p className="kv-auth-subtitle">
+          Start monitoring your infrastructure from one place.
         </p>
-
       </div>
 
-
-      {/* CARD */}
-
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-7">
-
-        <form
-          onSubmit={handleSignUp}
-          className="space-y-5"
-        >
-
-          {/* NAME */}
-
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-sm font-medium text-zinc-300"
-            >
-              Display name
-            </label>
-
-            <input
-              id="name"
-              type="text"
-              required
-              autoComplete="name"
-              value={name}
-              onChange={(event) =>
-                setName(event.target.value)
-              }
-              placeholder="Nome de Utilizador"
-              className="
-                w-full rounded-xl
-                border border-zinc-700
-                bg-zinc-950
-                px-4 py-3
-                text-white
-                outline-none
-                transition
-                placeholder:text-zinc-700
-                focus:border-zinc-500
-              "
-            />
+      <section className="kv-auth-card" aria-label="Create your account">
+        <form onSubmit={handleSignUp} className="kv-auth-form">
+          <div className="kv-auth-field">
+            <label htmlFor="name" className="kv-auth-label">Display name</label>
+            <div className="kv-auth-input-frame">
+              <UserRound size={18} className="kv-auth-input-icon" aria-hidden="true" />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                autoComplete="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Your display name"
+                className="kv-auth-input"
+              />
+            </div>
           </div>
 
-
-          {/* EMAIL */}
-
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-zinc-300"
-            >
-              Email
-            </label>
-
-            <input
-              id="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(event) =>
-                setEmail(event.target.value)
-              }
-              placeholder="you@example.com"
-              className="
-                w-full rounded-xl
-                border border-zinc-700
-                bg-zinc-950
-                px-4 py-3
-                text-white
-                outline-none
-                transition
-                placeholder:text-zinc-700
-                focus:border-zinc-500
-              "
-            />
+          <div className="kv-auth-field">
+            <label htmlFor="email" className="kv-auth-label">Email</label>
+            <div className="kv-auth-input-frame">
+              <Mail size={18} className="kv-auth-input-icon" aria-hidden="true" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@example.com"
+                className="kv-auth-input"
+              />
+            </div>
           </div>
 
-
-          {/* PASSWORD */}
-
-          <div>
-
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm font-medium text-zinc-300"
-            >
-              Password
-            </label>
-
-            <div className="relative">
-
+          <div className="kv-auth-field">
+            <label htmlFor="password" className="kv-auth-label">Password</label>
+            <div className="kv-auth-input-frame">
+              <LockKeyhole size={18} className="kv-auth-input-icon" aria-hidden="true" />
               <input
                 id="password"
-                type={
-                  showPassword
-                    ? "text"
-                    : "password"
-                }
+                name="password"
+                type={showPassword ? "text" : "password"}
                 required
                 minLength={8}
                 autoComplete="new-password"
                 value={password}
-                onChange={(event) =>
-                  setPassword(event.target.value)
-                }
+                onChange={(event) => setPassword(event.target.value)}
                 placeholder="Minimum 8 characters"
-                className="
-                  w-full rounded-xl
-                  border border-zinc-700
-                  bg-zinc-950
-                  px-4 py-3 pr-12
-                  text-white
-                  outline-none
-                  transition
-                  placeholder:text-zinc-700
-                  focus:border-zinc-500
-                "
+                className="kv-auth-input"
               />
-
               <button
                 type="button"
-                onClick={() =>
-                  setShowPassword(
-                    (current) => !current
-                  )
-                }
-                className="
-                  absolute right-3 top-1/2
-                  -translate-y-1/2
-                  rounded-lg p-1.5
-                  text-zinc-500
-                  transition
-                  hover:bg-zinc-800
-                  hover:text-white
-                "
+                className="kv-auth-visibility-toggle"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
               >
-                {showPassword ? (
-                  <EyeOff size={17} />
-                ) : (
-                  <Eye size={17} />
-                )}
+                {showPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
               </button>
-
             </div>
-
           </div>
 
-
-          {/* CONFIRM PASSWORD */}
-
-          <div>
-
-            <label
-              htmlFor="confirm-password"
-              className="mb-2 block text-sm font-medium text-zinc-300"
-            >
-              Confirm password
-            </label>
-
-            <div className="relative">
-
+          <div className="kv-auth-field">
+            <label htmlFor="confirm-password" className="kv-auth-label">Confirm password</label>
+            <div className="kv-auth-input-frame">
+              <LockKeyhole size={18} className="kv-auth-input-icon" aria-hidden="true" />
               <input
                 id="confirm-password"
-                type={
-                  showConfirmPassword
-                    ? "text"
-                    : "password"
-                }
+                name="confirm-password"
+                type={showConfirmPassword ? "text" : "password"}
                 required
+                minLength={8}
                 autoComplete="new-password"
                 value={confirmPassword}
-                onChange={(event) =>
-                  setConfirmPassword(
-                    event.target.value
-                  )
-                }
+                onChange={(event) => setConfirmPassword(event.target.value)}
                 placeholder="Repeat your password"
-                className="
-                  w-full rounded-xl
-                  border border-zinc-700
-                  bg-zinc-950
-                  px-4 py-3 pr-12
-                  text-white
-                  outline-none
-                  transition
-                  placeholder:text-zinc-700
-                  focus:border-zinc-500
-                "
+                className="kv-auth-input"
               />
-
               <button
                 type="button"
-                onClick={() =>
-                  setShowConfirmPassword(
-                    (current) => !current
-                  )
-                }
-                className="
-                  absolute right-3 top-1/2
-                  -translate-y-1/2
-                  rounded-lg p-1.5
-                  text-zinc-500
-                  transition
-                  hover:bg-zinc-800
-                  hover:text-white
-                "
+                className="kv-auth-visibility-toggle"
+                onClick={() => setShowConfirmPassword((current) => !current)}
+                aria-label={showConfirmPassword ? "Hide confirmation password" : "Show confirmation password"}
+                aria-pressed={showConfirmPassword}
               >
-                {showConfirmPassword ? (
-                  <EyeOff size={17} />
-                ) : (
-                  <Eye size={17} />
-                )}
+                {showConfirmPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
               </button>
-
             </div>
-
           </div>
 
+          {error && <div role="alert" className="kv-auth-alert">{error}</div>}
 
-          {/* ERROR */}
-
-          {error && (
-            <div className="rounded-xl border border-red-900 bg-red-950/30 px-4 py-3 text-sm text-red-400">
-              {error}
-            </div>
-          )}
-
-
-          {/* SUBMIT */}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="
-              flex w-full items-center
-              justify-center gap-2
-              rounded-xl bg-white
-              px-4 py-3
-              font-medium text-black
-              transition
-              hover:bg-zinc-200
-              disabled:cursor-not-allowed
-              disabled:opacity-50
-            "
-          >
+          <button type="submit" disabled={loading} className="kv-auth-submit">
             {loading ? (
-              <>
-                <Loader2
-                  size={17}
-                  className="animate-spin"
-                />
-
-                Creating account...
-              </>
+              <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Creating account...</>
             ) : (
-              <>
-                <UserPlus size={17} />
-
-                Create account
-              </>
+              <><UserPlus size={18} aria-hidden="true" /> Create account</>
             )}
           </button>
-
         </form>
 
-
-        {/* LOGIN */}
-
-        <div className="mt-6 border-t border-zinc-800 pt-6 text-center text-sm text-zinc-500">
-
+        <div className="kv-auth-footer">
           Already have an account?{" "}
-
-          <Link
-            href="/auth/login"
-            className="font-medium text-white transition hover:text-zinc-300"
-          >
-            Sign in
-          </Link>
-
+          <Link href="/auth/login">Sign in</Link>
         </div>
-
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-/* Kenvoryx marketing navigation — floating glass pill inspired by the Filipa Cardinha website.
+/* KenvoryX marketing navigation — floating glass pill inspired by the Filipa Cardinha website.
    Scoped to the marketing routes only; dashboard and admin navigation stay unchanged. */
 
 .kv-marketing-shell { --kv-header-offset: 102px; }

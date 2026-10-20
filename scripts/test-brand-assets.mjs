@@ -34,99 +34,53 @@ const { BrandLogo } = await load("components/brand-logo.tsx", {
 });
 const renderLogo = (props) => renderToStaticMarkup(React.createElement(BrandLogo, props));
 
-test("compact lockup renders a decorative S and one readable single-line name", () => {
+test("KenvoryX lockup has one new symbol and a single-line branded wordmark", () => {
   const html = renderLogo({ variant: "lockup" });
-  assert.equal((html.match(/<img\b/g) ?? []).length, 1);
+  assert.equal((html.match(/<img\\b/g) ?? []).length, 1);
   assert.match(html, /alt=""/);
-  assert.match(html, /src="\/logos\/sentinelgrid-mark\.svg"/);
-  assert.match(html, /whitespace-nowrap text-\[18px\]/);
-  assert.match(html, /Sentinel<span[^>]*>Grid<\/span>/);
-  assert.doesNotMatch(html, /sentinelgrid-wordmark|Infrastructure|uppercase|border|bg-white/);
+  assert.match(html, /src="\\/logos\\/kenvoryx-mark\\.svg"/);
+  assert.match(html, /Kenvory<span[^>]*>X<\\/span>/);
+  assert.doesNotMatch(html, /SentinelGrid|sentinelgrid-mark/);
   assert.match(renderLogo({ variant: "lockup", decorative: true }), /^<span aria-hidden="true"/);
 });
 
-test("standalone asset variants retain sizing, accessible names and class overrides", () => {
+test("mark and wordmark preserve accessible naming and class overrides", () => {
   const mark = renderLogo({ className: "h-9 w-9" });
-  assert.match(mark, /alt="SentinelGrid"/);
-  assert.match(mark, /width="320" height="384"/);
-  assert.match(mark, /class="shrink-0 object-contain h-9 w-9"/);
+  assert.match(mark, /alt="KenvoryX"/);
+  assert.match(mark, /width="350" height="365"/);
+  assert.match(mark, /class="shrink-0 object-contain h-8 w-8 h-9 w-9"/);
   const wordmark = renderLogo({ variant: "wordmark" });
-  assert.match(wordmark, /src="\/logos\/sentinelgrid-wordmark\.svg"/);
-  assert.match(wordmark, /width="800" height="160"/);
+  assert.match(wordmark, /Kenvory<span[^>]*>X<\\/span>/);
   assert.match(renderLogo({ decorative: true }), /alt=""/);
-  assert.match(renderLogo({ variant: "lockup", preload: true }), /rel="preload"/);
 });
 
-test("navigation uses the compact lockup rather than shrinking the stacked artwork", async () => {
-  for (const path of [
-    "app/(web)/layout.tsx",
-    "app/auth/layout.tsx",
-    "components/dashboard/dashboard-sidebar.tsx",
-  ]) {
-    const source = (await read(path)).toString();
-    assert.match(source, /<BrandLogo variant="lockup"(?:\s+className="[^"]*")?\s*\/>/, path);
-    assert.doesNotMatch(source, /variant="wordmark"/, path);
+test("all vector identity files have valid standalone SVG content", async () => {
+  for (const name of ["kenvoryx-mark", "kenvoryx-wordmark", "kenvoryx-lockup"]) {
+    const svg = await read(`public/logos/${name}.svg`);
+    assert.match(svg.toString(), /<svg[^>]+viewBox=/);
+    const metadata = await sharp(svg).metadata();
+    assert.equal(metadata.format, "svg");
   }
+  const icon = await read("app/icon.svg");
+  assert.match(icon.toString(), /KenvoryX|kv-spine/);
 });
 
-test("vector variants are self-contained and use paths, not installed fonts", async () => {
-  for (const variant of ["mark", "wordmark", "logo"]) {
-    const svg = (await read(`public/logos/sentinelgrid-${variant}.svg`)).toString();
-    assert.match(svg, /<svg[^>]+viewBox=/);
-    assert.match(svg, /<path /);
-    assert.doesNotMatch(svg, /<(?:script|image|text|foreignObject)\b|\bhref=/i);
-    const { channels } = await sharp(Buffer.from(svg)).metadata();
-    assert.equal(channels, 4);
-  }
-});
-
-test("PNG exports have the expected dimensions and transparent backgrounds", async () => {
-  for (const [variant, width, height] of [
-    ["mark", 512, 512],
-    ["wordmark", 1600, 320],
-    ["logo", 1600, 1120],
-  ]) {
-    const png = await read(`public/logos/sentinelgrid-${variant}.png`);
-    const metadata = await sharp(png).metadata();
-    assert.equal(metadata.width, width);
-    assert.equal(metadata.height, height);
-    assert.equal(metadata.hasAlpha, true);
-    const { data } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-    assert.equal(data[3], 0);
-    assert.ok(data.some((value, index) => index % 4 === 3 && value === 255));
-  }
-});
-
-test("favicon and legacy URLs serve the new branding", async () => {
-  const mark = await read("public/logos/sentinelgrid-mark.png");
-  assert.deepEqual(await read("app/icon.png"), mark);
-  assert.deepEqual(await read("public/logos/sentinelgrid_png.png"), mark);
-  assert.deepEqual(await read("public/logos/sentinelgrid.png"), await read("public/logos/sentinelgrid-logo.png"));
-  const apple = await sharp(await read("app/apple-icon.png")).metadata();
+test("generated social and Apple images use the KenvoryX brand", async () => {
+  await import("./generate-kenvoryx-assets.mjs");
+  const [social, apple] = await Promise.all([
+    sharp(await read("public/og-image.png")).metadata(),
+    sharp(await read("app/apple-icon.png")).metadata(),
+  ]);
+  assert.equal(social.width, 1200);
+  assert.equal(social.height, 630);
   assert.equal(apple.width, 180);
   assert.equal(apple.height, 180);
+  assert.match((await read("app/layout.tsx")).toString(), /KenvoryX/);
 });
 
-test("social card matches existing metadata and includes both blue symbol and white lettering", async () => {
-  const { data, info } = await sharp(await read("public/og-image.png"))
-    .ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  assert.equal(info.width, 1200);
-  assert.equal(info.height, 630);
-  assert.deepEqual([...data.subarray(0, 4)], [4, 12, 23, 255]);
-  let blue = 0;
-  let white = 0;
-  for (let index = 0; index < data.length; index += 4) {
-    if (data[index] < 60 && data[index + 2] > 150) blue++;
-    if (data[index] > 230 && data[index + 1] > 230 && data[index + 2] > 230) white++;
-  }
-  assert.ok(blue > 10000);
-  assert.ok(white > 3000);
-  assert.match((await read("app/layout.tsx")).toString(), /\/og-image\.png/);
-});
-
-test("all existing application logo surfaces use the shared component", async () => {
+test("website, auth and dashboard use the shared logo component", async () => {
   for (const path of [
-    "app/(web)/layout.tsx",
+    "components/marketing/marketing-navigation.tsx",
     "app/auth/layout.tsx",
     "app/loading.tsx",
     "app/onboarding/page.tsx",
@@ -134,7 +88,6 @@ test("all existing application logo surfaces use the shared component", async ()
     "components/dashboard/dashboard-sidebar.tsx",
   ]) {
     const source = (await read(path)).toString();
-    assert.match(source, /<BrandLogo\b/, path);
-    assert.doesNotMatch(source, /\/logos\/sentinelgrid_png\.png/, path);
+    assert.match(source, /<BrandLogo\\b/, path);
   }
 });

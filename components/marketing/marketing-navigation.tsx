@@ -39,25 +39,32 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
     let frame = 0;
 
     const positionIndicator = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        const selected = Array.from(nav.querySelectorAll<HTMLAnchorElement>("a[data-nav-href]"))
-          .find((item) => item.dataset.navHref === highlightedHref);
-        if (!selected) return;
-        const parent = nav.getBoundingClientRect();
-        const current = selected.getBoundingClientRect();
-        setIndicator({ left: current.left - parent.left, width: current.width });
-      });
+      const selected = Array.from(nav.querySelectorAll<HTMLAnchorElement>("a[data-nav-href]"))
+        .find((item) => item.dataset.navHref === highlightedHref);
+      if (!selected) return;
+      const parent = nav.getBoundingClientRect();
+      const current = selected.getBoundingClientRect();
+      const left = current.left - parent.left;
+      const width = current.width;
+      setIndicator((previous) =>
+        previous?.left === left && previous.width === width ? previous : { left, width }
+      );
     };
 
+    const scheduleMeasure = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(positionIndicator);
+    };
+
+    // Synchronous layout measurement prevents a one-frame flash on route changes.
     positionIndicator();
-    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(positionIndicator);
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(scheduleMeasure);
     observer?.observe(nav);
-    window.addEventListener("resize", positionIndicator);
+    window.addEventListener("resize", scheduleMeasure);
     return () => {
       window.cancelAnimationFrame(frame);
       observer?.disconnect();
-      window.removeEventListener("resize", positionIndicator);
+      window.removeEventListener("resize", scheduleMeasure);
     };
   }, [highlightedHref]);
 

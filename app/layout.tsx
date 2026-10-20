@@ -7,21 +7,21 @@ const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "https://sentinelgrid-one.vercel.app/";
 
-export const metadata = {
-  title: "Kenvoryx",
-  description: "Infrastructure monitoring platform",
+export const metadata: Metadata = {\n  metadataBase: new URL(defaultUrl),
+  title: "KenvoryX",
+  description: "Monitor. Manage. Secure. — Infrastructure monitoring and endpoint management.",
 
   openGraph: {
-    title: "Kenvoryx",
-    description: "Infrastructure monitoring platform",
-    url: "https://sentinelgrid-one.vercel.app",
-    siteName: "Kenvoryx",
+    title: "KenvoryX",
+    description: "Monitor. Manage. Secure. — Infrastructure monitoring and endpoint management.",
+    url: defaultUrl,
+    siteName: "KenvoryX",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Kenvoryx",
+        alt: "KenvoryX",
       },
     ],
     type: "website",
@@ -29,8 +29,8 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Kenvoryx",
-    description: "Infrastructure monitoring platform",
+    title: "KenvoryX",
+    description: "Monitor. Manage. Secure. — Infrastructure monitoring and endpoint management.",
     images: ["/og-image.png"],
   },
 };

@@ -1,3 +1,8 @@
+/**
+ * Compatibility generator: keep old SentinelGrid logo variants available for
+ * signed Windows installers and legacy update artifacts. Public site icons are
+ * generated exclusively by generate-kenvoryx-assets.mjs.
+ */
 import { readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 
@@ -21,29 +26,19 @@ const markPng = await sharp(Buffer.from(mark))
   .png()
   .toBuffer();
 const logoPng = await sharp(Buffer.from(logo)).resize(1600, 1120).png().toBuffer();
-const socialLogo = await sharp(Buffer.from(logo)).resize(760, 532).png().toBuffer();
 
 await Promise.all([
   writeFile(file("public/logos/sentinelgrid-mark.png"), markPng),
   writeFile(file("public/logos/sentinelgrid-logo.png"), logoPng),
   writeFile(file("public/logos/sentinelgrid_png.png"), markPng),
   writeFile(file("public/logos/sentinelgrid.png"), logoPng),
-  writeFile(file("app/icon.png"), markPng),
   sharp(Buffer.from(wordmark))
     .resize(1600, 320)
     .png()
     .toBuffer()
     .then((buffer) => writeFile(file("public/logos/sentinelgrid-wordmark.png"), buffer)),
-  sharp({ create: { width: 1200, height: 630, channels: 4, background: "#040c17" } })
-    .composite([{ input: socialLogo, left: 220, top: 49 }])
-    .png()
-    .toBuffer()
-    .then((buffer) => writeFile(file("public/og-image.png"), buffer)),
-  sharp(Buffer.from(mark))
-    .resize(180, 180, { fit: "contain", background: "#040c17" })
-    .flatten({ background: "#040c17" })
-    .png()
-    .toBuffer()
-    .then((buffer) => writeFile(file("app/apple-icon.png"), buffer)),
 ]);
-console.log("SentinelGrid logo variants, application icons and social image generated.");
+
+// Never regenerate the old app/icon.png: Next.js uses app/icon.svg.
+await import("./generate-kenvoryx-assets.mjs");
+console.log("Legacy agent brand assets retained; KenvoryX website branding refreshed.");

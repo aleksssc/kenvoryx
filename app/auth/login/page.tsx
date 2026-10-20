@@ -15,7 +15,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full">
       <LoginForm />
     </div>
   );

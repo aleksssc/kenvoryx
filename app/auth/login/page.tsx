@@ -15,7 +15,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="w-full">
+    <div className="flex w-full min-w-0 justify-center">
       <LoginForm />
     </div>
   );

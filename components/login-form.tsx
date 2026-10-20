@@ -62,7 +62,7 @@ export function LoginForm() {
         </div>
 
         <h1 className="text-3xl font-bold tracking-tight">
-          Sign in to Kenvoryx
+          Sign in to KenvoryX
         </h1>
 
         <p className="mt-2 text-sm text-zinc-500">

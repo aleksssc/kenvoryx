@@ -8,20 +8,20 @@ const defaultUrl = process.env.VERCEL_URL
   : "https://sentinelgrid-one.vercel.app/";
 
 export const metadata = {
-  title: "SentinelGrid",
+  title: "Kenvoryx",
   description: "Infrastructure monitoring platform",
 
   openGraph: {
-    title: "SentinelGrid",
+    title: "Kenvoryx",
     description: "Infrastructure monitoring platform",
     url: "https://sentinelgrid-one.vercel.app",
-    siteName: "SentinelGrid",
+    siteName: "Kenvoryx",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SentinelGrid",
+        alt: "Kenvoryx",
       },
     ],
     type: "website",
@@ -29,7 +29,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "SentinelGrid",
+    title: "Kenvoryx",
     description: "Infrastructure monitoring platform",
     images: ["/og-image.png"],
   },

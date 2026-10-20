@@ -966,7 +966,7 @@ export default async function DashboardPage() {
                 </h2>
 
                 <p className="mt-1 text-xs text-surface-muted">
-                  Latest devices reporting to SentinelGrid, using effective heartbeat status.
+                  Latest devices reporting to Kenvoryx, using effective heartbeat status.
                 </p>
               </div>
 
@@ -999,7 +999,7 @@ export default async function DashboardPage() {
                 </p>
 
                 <p className="mt-1 max-w-sm text-xs leading-5 text-surface-muted">
-                  Install the SentinelGrid Agent on a device to start receiving
+                  Install the Kenvoryx Agent on a device to start receiving
                   inventory, status and health information.
                 </p>
 
@@ -1503,7 +1503,7 @@ export default async function DashboardPage() {
               </h2>
 
               <p className="mt-1 text-xs text-surface-muted">
-                Common SentinelGrid management and operations tasks.
+                Common Kenvoryx management and operations tasks.
               </p>
             </div>
 
@@ -1602,7 +1602,7 @@ export default async function DashboardPage() {
                   </p>
 
                   <p className="mt-0.5 text-[11px] text-surface-muted">
-                    Install SentinelGrid Agent
+                    Install Kenvoryx Agent
                   </p>
 
                 </div>
@@ -1734,7 +1734,7 @@ export default async function DashboardPage() {
 
             <Clock3 size={12} />
 
-            Live infrastructure data from SentinelGrid Agents
+            Live infrastructure data from Kenvoryx Agents
 
           </div>
 

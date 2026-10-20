@@ -334,7 +334,7 @@ export default async function BillingPage({
         <PageHeader
           eyebrow="Account"
           title="Billing"
-          description="Manage your Kenvoryx plan, infrastructure limits and subscription."
+          description="Manage your KenvoryX plan, infrastructure limits and subscription."
           icon={
             <CreditCard
               size={22}

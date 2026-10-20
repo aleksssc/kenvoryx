@@ -27,7 +27,7 @@ export default function NewClientPage() {
       <form action={formAction} className="sg-surface overflow-hidden">
         <div className="border-b border-surface-edge px-6 py-5"><h2 className="sg-section-title">Client information</h2><p className="mt-1 text-sm text-surface-muted">Basic information used to identify this client.</p></div>
         <div className="space-y-6 p-6">
-          <div><label htmlFor="name" className="mb-2 block text-sm font-medium text-zinc-300">Client name</label><input id="name" name="name" type="text" required autoFocus placeholder="Example: SentinelGrid" className="sg-control w-full px-4 py-3" /><p className="mt-2 text-xs text-surface-muted">This name will appear throughout SentinelGrid.</p></div>
+          <div><label htmlFor="name" className="mb-2 block text-sm font-medium text-zinc-300">Client name</label><input id="name" name="name" type="text" required autoFocus placeholder="Example: Kenvoryx" className="sg-control w-full px-4 py-3" /><p className="mt-2 text-xs text-surface-muted">This name will appear throughout Kenvoryx.</p></div>
           <div><label htmlFor="description" className="mb-2 block text-sm font-medium text-zinc-300">Description</label><textarea id="description" name="description" placeholder="Optional description..." rows={5} className="sg-control w-full resize-none px-4 py-3" /><p className="mt-2 text-xs text-surface-muted">You can use this field for notes or context about the client.</p></div>
           {state.error && <div role="alert" className="rounded-xl border border-red-900/50 bg-red-950/30 px-4 py-3 text-sm text-red-400">{state.error}</div>}
         </div>

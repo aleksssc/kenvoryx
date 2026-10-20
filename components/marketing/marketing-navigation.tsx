@@ -92,7 +92,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
   return (
     <header className="kv-site-header">
       <div className="kv-header-inner">
-        <Link href="/" className="kv-header-brand" aria-label="Kenvoryx — Home" onClick={closeMobile}>
+        <Link href="/" className="kv-header-brand" aria-label="KenvoryX — Home" onClick={closeMobile}>
           <BrandLogo variant="lockup" />
         </Link>
 

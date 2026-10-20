@@ -197,7 +197,7 @@ function RememberSidebarSetting() {
         </p>
 
         <p className="sg-section-description">
-          Restore the last sidebar state when you return to SentinelGrid.
+          Restore the last sidebar state when you return to Kenvoryx.
         </p>
       </div>
 
@@ -493,7 +493,7 @@ export default function AppearanceSettings() {
       <Surface>
         <SectionHeader
           title="Interface"
-          description="Customize how SentinelGrid is presented in this browser."
+          description="Customize how Kenvoryx is presented in this browser."
           icon={
             <SlidersHorizontal
               size={17}

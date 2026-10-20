@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { BrandLogo } from "@/components/brand-logo";
 import "./marketing-navigation.css";
 
@@ -32,7 +32,8 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
 
   const highlightedHref = hovered ?? activeHref;
 
-  useEffect(() => {
+  // Measure the indicator before paint so a route change never flashes its old position.
+  useLayoutEffect(() => {
     const nav = desktopNav.current;
     if (!nav) return;
     let frame = 0;
@@ -59,6 +60,12 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
       window.removeEventListener("resize", positionIndicator);
     };
   }, [highlightedHref]);
+
+  // End any transient hover after navigation. The active route takes over at the same location.
+  useEffect(() => {
+    setHovered(null);
+    setMobileOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -104,7 +111,8 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
               onPointerEnter={(event) => { if (event.pointerType !== "touch") setHovered(link.href); }}
               onFocus={() => setHovered(link.href)}
               onBlur={() => setHovered(null)}
-              onClick={() => setHovered(null)}
+              // Keep the pill on the clicked link until pathname catches up; do not bounce to the previous route.
+              onClick={() => setHovered(link.href)}
             >
               {link.label}
             </Link>

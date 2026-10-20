@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { ArrowLeft } from "lucide-react";
+import "./auth-design.css";
 
 export default function AuthLayout({
   children,
@@ -8,35 +9,28 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="kv-auth-shell">
+      <div className="kv-auth-visual" aria-hidden="true">
+        <span className="kv-auth-light kv-auth-light-left" />
+        <span className="kv-auth-light kv-auth-light-right" />
+        <span className="kv-auth-orbit kv-auth-orbit-left" />
+        <span className="kv-auth-orbit kv-auth-orbit-right" />
+        <span className="kv-auth-dots" />
+      </div>
 
-      {/* HEADER */}
-      <header className="border-b border-zinc-800">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-bold"
-          >
+      <header className="kv-auth-topbar">
+        <div className="kv-auth-topbar-inner">
+          <Link href="/" aria-label="KenvoryX home">
             <BrandLogo variant="lockup" />
           </Link>
-
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-white"
-          >
-            <ArrowLeft size={16} />
+          <Link href="/" className="kv-auth-back">
+            <ArrowLeft size={16} aria-hidden="true" />
             Back to home
           </Link>
-
         </div>
       </header>
 
-      {/* CONTENT */}
-      <div className="flex min-h-[calc(100vh-64px)] items-center justify-center px-6 py-12">
-        {children}
-      </div>
-
+      <main className="kv-auth-main">{children}</main>
     </div>
   );
 }

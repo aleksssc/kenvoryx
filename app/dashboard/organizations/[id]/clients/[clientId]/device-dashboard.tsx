@@ -1455,7 +1455,7 @@ export default function DeviceDashboard({
           </h3>
 
           <p className="mt-2 max-w-lg text-sm leading-6 text-surface-muted">
-            Devices will appear here once a Kenvoryx agent is deployed and linked to this client.
+            Devices will appear here once a KenvoryX agent is deployed and linked to this client.
           </p>
 
         </div>
@@ -1896,7 +1896,7 @@ export default function DeviceDashboard({
                     </OverviewCard>
 
                     <OverviewCard
-                      title="Kenvoryx Agent"
+                      title="KenvoryX Agent"
                       subtitle="Endpoint management agent"
                       icon={<ShieldCheck size={17} />}
                     >
@@ -2114,7 +2114,7 @@ export default function DeviceDashboard({
                     selectedDevice.hostname}
                 </span>{" "}
 
-                from Kenvoryx.
+                from KenvoryX.
               </p>
 
               <div className="mt-5 rounded-xl border border-red-950 bg-[#120b0d] px-4 py-3">
@@ -2127,7 +2127,7 @@ export default function DeviceDashboard({
                   />
 
                   <p className="text-xs leading-5 text-red-300">
-                    The device record and its Kenvoryx agent credentials will be removed.
+                    The device record and its KenvoryX agent credentials will be removed.
                   </p>
 
                 </div>

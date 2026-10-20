@@ -79,7 +79,7 @@ export default async function AdminOverviewPage() {
 
   const services = [
     {
-      name: "Kenvoryx",
+      name: "KenvoryX",
       detail: "Administration request is being served.",
       status: "Available",
       tone: "success" as const,
@@ -118,7 +118,7 @@ export default async function AdminOverviewPage() {
       <AdminPageHeader
         eyebrow="Platform"
         title="Overview"
-        description="The operational state of Kenvoryx at a glance."
+        description="The operational state of KenvoryX at a glance."
       />
 
       <AdminMetricStrip

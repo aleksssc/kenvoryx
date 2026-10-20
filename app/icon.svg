@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 350 365" fill="none"><rect x="10" y="18" width="330" height="330" rx="69" fill="#071221"/><defs>
+  <linearGradient id="kv-top" x1="65" y1="156" x2="226" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#005BFA"/><stop offset=".56" stop-color="#0A93FA"/><stop offset="1" stop-color="#03E9F4"/></linearGradient>
+  <linearGradient id="kv-bottom" x1="70" y1="267" x2="236" y2="354" gradientUnits="userSpaceOnUse"><stop stop-color="#0077FF"/><stop offset="1" stop-color="#0150F1"/></linearGradient>
+  <linearGradient id="kv-spine" x1="73" y1="215" x2="288" y2="112" gradientUnits="userSpaceOnUse"><stop stop-color="#1AE6ED"/><stop offset=".54" stop-color="#0C91F7"/><stop offset="1" stop-color="#03DDEB"/></linearGradient>
+  <linearGradient id="kv-branch" x1="177" y1="203" x2="294" y2="327" gradientUnits="userSpaceOnUse"><stop stop-color="#0060F9"/><stop offset="1" stop-color="#05CDFA"/></linearGradient>
+  <linearGradient id="kv-node" x1="64" y1="176" x2="106" y2="240" gradientUnits="userSpaceOnUse"><stop stop-color="#08F0F4"/><stop offset=".52" stop-color="#07B5FB"/><stop offset="1" stop-color="#0054F1"/></linearGradient>
+  <linearGradient id="kv-node-upper" x1="278" y1="47" x2="326" y2="115" gradientUnits="userSpaceOnUse"><stop stop-color="#04F1ED"/><stop offset="1" stop-color="#05A4FA"/></linearGradient>
+  <linearGradient id="kv-node-lower" x1="276" y1="291" x2="328" y2="355" gradientUnits="userSpaceOnUse"><stop stop-color="#02D5F5"/><stop offset="1" stop-color="#0060FF"/></linearGradient>
+  <filter id="kv-shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+</defs>
+<path d="M62 156 C61 143 70 132 81 121 L147 57 C156 48 167 44 182 44 H224 C232 44 235 50 229 57 L140 152 C122 172 110 164 96 158 C85 153 73 153 62 156 Z" fill="url(#kv-top)"/>
+<path d="M62 256 C84 260 99 247 117 247 C126 247 136 252 145 261 L230 345 C236 352 231 355 219 355 H183 C162 355 152 352 140 342 L80 287 C70 277 64 267 62 256 Z" fill="url(#kv-bottom)"/>
+<path d="M82 208 C116 216 138 204 161 183 L261 85 L293 114 L210 198 C199 208 200 216 209 225 L295 314 L269 344 L175 246 C146 217 134 216 110 228 L82 228 Z" fill="url(#kv-spine)"/>
+<path d="M203 203 L295 307 L277 333 L209 263 C190 242 176 224 203 203 Z" fill="url(#kv-branch)" opacity=".86"/>
+<circle cx="82" cy="210" r="36" fill="url(#kv-node)"/>
+<circle cx="300" cy="85" r="39" fill="url(#kv-node-upper)"/>
+<circle cx="300" cy="320" r="39" fill="url(#kv-node-lower)"/></svg>

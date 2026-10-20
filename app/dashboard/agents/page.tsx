@@ -74,7 +74,7 @@ export default async function AgentsPage() {
     <div className="sg-agent-layout">
       <Surface className="overflow-hidden" aria-labelledby="agent-fleet-title">
         <SectionHeader title="Agent fleet" description={latestVersion ? `Operational health and update compatibility. Latest release: v${latestVersion}.` : "Operational health and update compatibility from reported telemetry."} icon={<Server size={17} />} />
-        {devicesError ? <div role="alert" className="sg-inline-notice">The Agent fleet could not be loaded. Refresh to retry.</div> : !fleet.length ? <EmptyState title="No Agents installed" description="Devices appear here after a Kenvoryx Agent reports its inventory." icon={<Bot size={22} />} /> : <div className="divide-y divide-surface-edge">
+        {devicesError ? <div role="alert" className="sg-inline-notice">The Agent fleet could not be loaded. Refresh to retry.</div> : !fleet.length ? <EmptyState title="No Agents installed" description="Devices appear here after a KenvoryX Agent reports its inventory." icon={<Bot size={22} />} /> : <div className="divide-y divide-surface-edge">
           <div className="sg-table-heading hidden gap-4 px-5 py-3 lg:grid lg:grid-cols-[minmax(0,1.35fr)_0.7fr_0.75fr_0.9fr_0.8fr_0.55fr_auto]"><span>Device</span><span>Agent version</span><span>Status</span><span>Update status</span><span>Last communication</span><span>Channel</span><span>Actions</span></div>
           {fleet.map((device) => {
             const status = operationalStatus(device, now); const failed = latestFailures.get(device.id); const update = updateStatus(device, latestVersion, Boolean(failed)); const href = `/dashboard/organizations/${organization.id}/clients/${device.clients.id}`;

@@ -8,7 +8,10 @@
     "test:performance": "node --test scripts/test-device-performance.mjs",
     "build:realtime": "tsc -p relay/tsconfig.json",
     "start:realtime": "node relay/realtime-relay.mjs",
-    "test:realtime": "npm run build:realtime && node --test scripts/test-realtime-relay.mjs scripts/test-realtime-protocol.mjs scripts/test-realtime-startup.mjs scripts/test-realtime-deployment.mjs scripts/test-realtime-integration.mjs"
+    "test:realtime": "npm run build:realtime && node --test scripts/test-realtime-relay.mjs scripts/test-realtime-protocol.mjs scripts/test-realtime-startup.mjs scripts/test-realtime-deployment.mjs scripts/test-realtime-integration.mjs",
+    "predev": "node scripts/generate-kenvoryx-assets.mjs",
+    "prebuild": "node scripts/generate-kenvoryx-assets.mjs",
+    "assets:brand": "node scripts/generate-kenvoryx-assets.mjs"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.1",

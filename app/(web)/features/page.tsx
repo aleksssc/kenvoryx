@@ -80,7 +80,7 @@ export default function FeaturesPage() {
                                 </div>
 
                                 <div className="domain-preview-info">
-                                    <strong>sentinelgrid.com</strong>
+                                    <strong>monitor.example.com</strong>
                                     <span>Operational</span>
                                 </div>
 

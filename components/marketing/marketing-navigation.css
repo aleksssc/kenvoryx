@@ -1,6 +1,8 @@
 /* Kenvoryx marketing navigation — floating glass pill inspired by the Filipa Cardinha website.
    Scoped to the marketing routes only; dashboard and admin navigation stay unchanged. */
 
+.kv-marketing-shell { --kv-header-offset: 102px; }
+
 .kv-site-header {
   position: fixed;
   z-index: 90;
@@ -109,7 +111,7 @@
 .kv-mobile-menu { display: none; }
 .kv-mobile-menu[hidden] { display: none !important; }
 
-.kv-site-header-spacer { height: 102px; }
+.kv-site-header-spacer { height: var(--kv-header-offset); }
 
 @media (max-width: 1020px) {
   .kv-header-inner { min-height: 64px; }
@@ -159,7 +161,7 @@
     border-top: 1px solid rgba(255, 255, 255, .09);
   }
   .kv-mobile-auth a { border-radius: 999px; }
-  .kv-site-header-spacer { height: 96px; }
+  .kv-marketing-shell { --kv-header-offset: 96px; }
 }
 
 @media (max-width: 440px) {
@@ -167,7 +169,7 @@
   .kv-header-inner { padding: 7px 12px; }
   .kv-header-brand .sg-sidebar-lockup { max-width: 180px; }
   .kv-mobile-auth a { padding-inline: 12px; }
-  .kv-site-header-spacer { height: 85px; }
+  .kv-marketing-shell { --kv-header-offset: 85px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

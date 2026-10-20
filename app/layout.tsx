@@ -7,7 +7,8 @@ const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "https://sentinelgrid-one.vercel.app/";
 
-export const metadata: Metadata = {\n  metadataBase: new URL(defaultUrl),
+export const metadata: Metadata = {
+  metadataBase: new URL(defaultUrl),
   title: "KenvoryX",
   description: "Monitor. Manage. Secure. — Infrastructure monitoring and endpoint management.",
 

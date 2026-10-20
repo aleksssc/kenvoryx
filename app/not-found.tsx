@@ -71,7 +71,7 @@ export default function NotFound() {
 
         {/* DESCRIPTION */}
         <p className="mt-5 max-w-md text-sm leading-6 text-white/45">
-          SentinelGrid couldn't establish a connection to this route.
+          Kenvoryx couldn't establish a connection to this route.
           The page may have been moved, removed, or never existed.
         </p>
 
@@ -120,7 +120,7 @@ export default function NotFound() {
 
         {/* CODE */}
         <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.25em] text-white/15">
-          SentinelGrid // Route Resolution Failure
+          Kenvoryx // Route Resolution Failure
         </p>
 
       </div>

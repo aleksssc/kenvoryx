@@ -1,19 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowLeft, CheckCircle2, Loader2, Mail, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useState } from "react";
 
 export function ForgotPasswordForm({
   className,
@@ -24,82 +15,100 @@ export function ForgotPasswordForm({
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const supabase = createClient();
+  async function handleForgotPassword(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isLoading) return;
     setIsLoading(true);
     setError(null);
 
     try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      const supabase = createClient();
+      // The deployment origin must be added to the Supabase Auth redirect allowlist.
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
-      if (error) throw error;
+      if (resetError) throw resetError;
+      // Avoid exposing whether an email belongs to an existing account.
       setSuccess(true);
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+    } catch (cause: unknown) {
+      setError(cause instanceof Error ? cause.message : "Could not send the reset email.");
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      {success ? (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive
-              a password reset email.
+    <div className={cn("kv-auth-page", className)} {...props}>
+      <div className="kv-auth-heading">
+        <span className="kv-auth-eyebrow">Account recovery</span>
+        <h1 className="kv-auth-title">
+          {success ? "Check your email" : <>Reset your <span className="kv-auth-title-accent">password</span></>}
+        </h1>
+        <p className="kv-auth-subtitle">
+          {success
+            ? "If this email is registered, you will receive a link to set a new password."
+            : "Enter your email address and we will send you a secure reset link."}
+        </p>
+      </div>
+
+      <section className="kv-auth-card" aria-label="Password recovery">
+        {success ? (
+          <div className="kv-auth-success" role="status">
+            <span className="kv-auth-status-icon" aria-hidden="true">
+              <CheckCircle2 size={26} />
+            </span>
+            <p className="kv-auth-success-title">Recovery email requested</p>
+            <p className="kv-auth-success-description">
+              Check your inbox and spam folder. The link will take you back to KenvoryX.
             </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-            <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your
-              password
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleForgotPassword}>
-              <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                {error && <p className="text-sm text-red-500">{error}</p>}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending..." : "Send reset email"}
-                </Button>
+            <button
+              type="button"
+              className="kv-auth-submit"
+              onClick={() => { setSuccess(false); setError(null); }}
+            >
+              <span className="kv-auth-submit-content"><Send size={17} aria-hidden="true" /> Try another email</span>
+            </button>
+          </div>
+        ) : (
+          <form className="kv-auth-form" onSubmit={handleForgotPassword}>
+            <div className="kv-auth-field">
+              <label htmlFor="recovery-email" className="kv-auth-label">Email</label>
+              <div className="kv-auth-input-frame">
+                <Mail size={18} className="kv-auth-input-icon" aria-hidden="true" />
+                <input
+                  id="recovery-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  className="kv-auth-input"
+                />
               </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <Link
-                  href="/auth/login"
-                  className="underline underline-offset-4"
-                >
-                  Login
-                </Link>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-      )}
+            </div>
+
+            {error && <div role="alert" className="kv-auth-alert">{error}</div>}
+
+            <button type="submit" className="kv-auth-submit" disabled={isLoading}>
+              <span className="kv-auth-submit-content">
+                {isLoading ? (
+                  <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Sending...</>
+                ) : (
+                  <><Send size={18} aria-hidden="true" /> Send reset email</>
+                )}
+              </span>
+            </button>
+          </form>
+        )}
+
+        <div className="kv-auth-footer">
+          <Link href="/auth/login" className="kv-auth-return-link">
+            <ArrowLeft size={15} aria-hidden="true" /> Back to sign in
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

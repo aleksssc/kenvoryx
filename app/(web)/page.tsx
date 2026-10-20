@@ -14,10 +14,10 @@ export default function Home() {
                             HERO
         ========================================================== */}
 
-        <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden border-b border-zinc-800">
+        <section className="kv-home-hero border-b border-zinc-800">
 
           {/* ANIMATED BACKGROUND */}
-          <div className="pointer-events-none absolute inset-0">
+          <div className="kv-home-hero-background">
 
             <div className="hero-grid absolute inset-0" />
 
@@ -31,15 +31,7 @@ export default function Home() {
 
           {/* CONTENT */}
           <div
-            className="
-              relative z-10
-              mx-auto
-              flex
-              min-h-[calc(100vh-4rem)]
-              max-w-7xl
-              items-center
-              px-6
-            "
+            className="kv-home-hero-content"
           >
 
             <div className="max-w-4xl">

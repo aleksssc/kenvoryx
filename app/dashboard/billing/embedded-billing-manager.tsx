@@ -613,7 +613,7 @@ export default function EmbeddedBillingManager({
 
                         <p className="mt-1 text-xs text-surface-muted">
                           Manage renewal of
-                          your Kenvoryx
+                          your KenvoryX
                           subscription.
                         </p>
                       </div>

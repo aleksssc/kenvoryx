@@ -73,7 +73,7 @@ export default function MarketingLayout({
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8 text-sm text-zinc-600">
 
         <span>
-          © 2026 SentinelGrid
+          © 2026 Kenvoryx
         </span>
           <span>
             Infrastructure Monitoring Platform

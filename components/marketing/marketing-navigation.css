@@ -1,0 +1,179 @@
+/* KenvoryX marketing navigation — floating glass pill inspired by the Filipa Cardinha website.
+   Scoped to the marketing routes only; dashboard and admin navigation stay unchanged. */
+
+.kv-marketing-shell { --kv-header-offset: 102px; }
+
+.kv-site-header {
+  position: fixed;
+  z-index: 90;
+  top: 16px;
+  left: 50%;
+  width: min(1180px, calc(100% - 32px));
+  transform: translateX(-50%);
+  border: 1px solid rgba(141, 178, 203, .19);
+  border-radius: 999px;
+  color: #f8fafc;
+  background: rgba(11, 19, 32, .80);
+  box-shadow: 0 15px 55px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .045);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.kv-header-inner {
+  min-height: 70px;
+  padding: 8px 14px 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.kv-header-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
+.kv-header-brand:focus-visible,
+.kv-nav-link:focus-visible,
+.kv-menu-toggle:focus-visible,
+.kv-mobile-link:focus-visible {
+  outline: 2px solid #60c9f9;
+  outline-offset: 3px;
+}
+
+.kv-desktop-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  isolation: isolate;
+}
+
+.kv-nav-indicator {
+  position: absolute;
+  z-index: -1;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  background: linear-gradient(130deg, #087ecc, #0aa0da);
+  box-shadow: 0 5px 20px rgba(0, 154, 245, .24);
+  pointer-events: none;
+  transition: transform .44s cubic-bezier(.2, .8, .2, 1), width .44s cubic-bezier(.2, .8, .2, 1), opacity .2s ease;
+}
+
+.kv-nav-link {
+  position: relative;
+  z-index: 1;
+  padding: 11px 13px;
+  border-radius: 999px;
+  color: #9eaabd;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .25s ease;
+}
+
+.kv-nav-link:hover,
+.kv-nav-link[data-highlighted="true"],
+.kv-nav-link:focus-visible {
+  color: #fff;
+}
+
+.kv-header-auth {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.kv-header-auth a {
+  border-radius: 999px;
+}
+
+.kv-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  color: #fff;
+  cursor: pointer;
+}
+
+.kv-mobile-menu { display: none; }
+.kv-mobile-menu[hidden] { display: none !important; }
+
+.kv-site-header-spacer { height: var(--kv-header-offset); }
+
+@media (max-width: 1020px) {
+  .kv-header-inner { min-height: 64px; }
+  .kv-site-header { border-radius: 28px; }
+  .kv-desktop-nav, .kv-header-auth { display: none; }
+  .kv-menu-toggle { display: flex; }
+
+  .kv-mobile-menu {
+    display: block;
+    margin: 0 10px 10px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 18px;
+    background: rgba(4, 12, 23, .95);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .25);
+  }
+
+  .kv-mobile-menu nav {
+    display: grid;
+    gap: 3px;
+  }
+
+  .kv-mobile-link {
+    display: block;
+    padding: 13px 16px;
+    border-radius: 12px;
+    color: #b4c3d3;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+  }
+
+  .kv-mobile-link:hover,
+  .kv-mobile-link[aria-current="page"] {
+    color: #fff;
+    background: rgba(0, 159, 245, .2);
+  }
+
+  .kv-mobile-auth {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 13px 4px 3px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+  }
+  .kv-mobile-auth a { border-radius: 999px; }
+  .kv-marketing-shell { --kv-header-offset: 96px; }
+}
+
+@media (max-width: 440px) {
+  .kv-site-header { top: 10px; width: calc(100% - 20px); }
+  .kv-header-inner { padding: 7px 12px; }
+  .kv-header-brand .sg-sidebar-lockup { max-width: 180px; }
+  .kv-mobile-auth a { padding-inline: 12px; }
+  .kv-marketing-shell { --kv-header-offset: 85px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kv-nav-indicator,
+  .kv-nav-link,
+  .kv-mobile-link { transition: none; }
+}

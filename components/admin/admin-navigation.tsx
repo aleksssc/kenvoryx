@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { usePathname } from "next/navigation";
 import {
   Activity,
@@ -10,7 +11,6 @@ import {
   Gauge,
   Menu,
   RadioTower,
-  Shield,
   Users,
   X,
 } from "lucide-react";
@@ -52,9 +52,9 @@ export function AdminDesktopNavigation({ roleLabel }: { roleLabel: string }) {
   return (
     <aside className="sg-admin-sidebar" aria-label="Platform administration">
       <Link href="/admin" className="sg-admin-brand">
-        <span className="sg-admin-brand-mark"><Shield size={18} /></span>
+        <span className="sg-admin-brand-mark"><BrandLogo variant="mark" decorative className="h-7 w-7" /></span>
         <span>
-          <strong>SentinelGrid</strong>
+          <strong>KenvoryX</strong>
           <small>Platform Admin</small>
         </span>
       </Link>
@@ -88,7 +88,7 @@ export function AdminDesktopNavigation({ roleLabel }: { roleLabel: string }) {
       <div className="sg-admin-sidebar-footer">
         <Link href="/dashboard" className="sg-admin-back">
           <ArrowLeft size={15} />
-          Back to SentinelGrid
+          Back to KenvoryX
         </Link>
       </div>
     </aside>
@@ -103,9 +103,9 @@ export function AdminMobileNavigation({ roleLabel }: { roleLabel: string }) {
     <>
       <header className="sg-admin-mobile-header">
         <Link href="/admin" className="sg-admin-mobile-brand" onClick={() => setOpen(false)}>
-          <span className="sg-admin-brand-mark"><Shield size={17} /></span>
+          <span className="sg-admin-brand-mark"><BrandLogo variant="mark" decorative className="h-7 w-7" /></span>
           <span>
-            <strong>SentinelGrid</strong>
+            <strong>KenvoryX</strong>
             <small>Admin</small>
           </span>
         </Link>
@@ -148,7 +148,7 @@ export function AdminMobileNavigation({ roleLabel }: { roleLabel: string }) {
 
             <Link href="/dashboard" className="sg-admin-mobile-back" onClick={() => setOpen(false)}>
               <ArrowLeft size={15} />
-              Back to SentinelGrid
+              Back to KenvoryX
             </Link>
           </div>
         </div>

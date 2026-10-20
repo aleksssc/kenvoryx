@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { BrandLogo } from "@/components/brand-logo";
 import { Suspense } from "react";
 import { AuthButton } from "@/components/auth-button";
+import { MarketingNavigation } from "@/components/marketing/marketing-navigation";
 
 export default function MarketingLayout({
   children,
@@ -9,79 +8,28 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-
-      <header className="border-b border-zinc-800">
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-
-          {/* LOGO */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-bold"
-          >
-            <BrandLogo variant="lockup" />
-          </Link>
-
-          {/* NAV */}
-          <div className="hidden items-center gap-8 md:flex">
-
-            <Link
-              href="/features"
-              className="text-sm text-zinc-400 transition hover:text-white"
-            >
-              Features
-            </Link>
-
-            <Link
-              href="/pricing"
-              className="text-sm text-zinc-400 transition hover:text-white"
-            >
-              Pricing
-            </Link>
-
-            <Link
-              href="/security"
-              className="text-sm text-zinc-400 transition hover:text-white"
-            >
-              Security
-            </Link>
-
-            <Link
-              href="/about"
-              className="text-sm text-zinc-400 transition hover:text-white"
-            >
-              About
-            </Link>
-
-          </div>
-
-          {/* AUTH */}
+    <div className="kv-marketing-shell min-h-screen bg-zinc-950 text-white">
+      <MarketingNavigation
+        auth={
           <Suspense
-            fallback={
-              <div className="h-10 w-24 animate-pulse rounded-lg bg-white/5" />
-            }
+            fallback={<div className="h-10 w-24 animate-pulse rounded-full bg-white/5" />}
           >
             <AuthButton />
           </Suspense>
+        }
+      />
 
-        </nav>
-      </header>
+      {/* Fixed floating header must not cover page content. */}
+      <div className="kv-site-header-spacer" aria-hidden="true" />
 
       {children}
 
       <footer className="border-t border-zinc-800">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8 text-sm text-zinc-600">
-
-        <span>
-          © 2026 SentinelGrid
-        </span>
-          <span>
-            Infrastructure Monitoring Platform
-          </span>
-
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-600">
+          <span>© 2026 KenvoryX</span>
+          <span>Infrastructure Monitoring Platform</span>
         </div>
       </footer>
-
     </div>
   );
 }

@@ -14,10 +14,10 @@ export default function Home() {
                             HERO
         ========================================================== */}
 
-        <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden border-b border-zinc-800">
+        <section className="kv-home-hero border-b border-zinc-800">
 
           {/* ANIMATED BACKGROUND */}
-          <div className="pointer-events-none absolute inset-0">
+          <div className="kv-home-hero-background">
 
             <div className="hero-grid absolute inset-0" />
 
@@ -31,21 +31,13 @@ export default function Home() {
 
           {/* CONTENT */}
           <div
-            className="
-              relative z-10
-              mx-auto
-              flex
-              min-h-[calc(100vh-4rem)]
-              max-w-7xl
-              items-center
-              px-6
-            "
+            className="kv-home-hero-content"
           >
 
             <div className="max-w-4xl">
 
-              <p className="mb-5 text-sm font-medium text-emerald-400">
-                Infrastructure Monitoring Platform
+              <p className="mb-5 text-sm font-medium text-cyan-400">
+                KenvoryX · Monitor. Manage. Secure.
               </p>
 
               <h1 className="text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
@@ -55,8 +47,8 @@ export default function Home() {
               </h1>
 
               <p className="mt-7 max-w-2xl text-lg leading-8 text-zinc-400">
-                Monitor websites, APIs, servers, DNS, SSL certificates and
-                infrastructure from a single dashboard.
+                Monitor and manage devices, servers, services and infrastructure
+                securely from one unified platform.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-4">
@@ -93,7 +85,7 @@ export default function Home() {
 
           <div className="mb-14 max-w-2xl">
 
-            <p className="mb-4 text-sm font-medium text-emerald-400">
+            <p className="mb-4 text-sm font-medium text-cyan-400">
               Everything in one place
             </p>
 
@@ -178,9 +170,9 @@ function FeatureCard({
           bg-zinc-800
           text-zinc-300
           transition
-          group-hover:border-emerald-500/30
-          group-hover:bg-emerald-500/10
-          group-hover:text-emerald-400
+          group-hover:border-cyan-500/30
+          group-hover:bg-cyan-500/10
+          group-hover:text-cyan-400
         "
       >
         {icon}

@@ -194,7 +194,7 @@ export default function ProfilePage() {
             </h2>
 
             <p className="mt-1 text-sm text-surface-muted">
-              This information is displayed in your SentinelGrid account.
+              This information is displayed in your KenvoryX account.
             </p>
           </div>
 

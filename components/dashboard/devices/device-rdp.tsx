@@ -141,7 +141,7 @@ export default function DeviceRDP({ deviceId, available, access }: Props) {
       </button>
 
       {dialogOpen && (
-        <ViewportDialog label="SentinelGrid Remote" onDismiss={() => setDialogOpen(false)}>
+        <ViewportDialog label="KenvoryX Remote" onDismiss={() => setDialogOpen(false)}>
           <section
             role="dialog"
             aria-modal="true"
@@ -155,7 +155,7 @@ export default function DeviceRDP({ deviceId, available, access }: Props) {
                   <Monitor size={19} aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">SentinelGrid Remote</p>
+                  <p className="text-sm font-semibold text-white">KenvoryX Remote</p>
                   <p className="mt-0.5 text-xs text-[var(--sg-muted)]">
                     {session ? "Remote session ready to reconnect" : "Secure remote access"}
                   </p>
@@ -173,7 +173,7 @@ export default function DeviceRDP({ deviceId, available, access }: Props) {
 
             <div className="px-6 py-5">
               <h2 id="remote-title" className="text-base font-semibold text-white">
-                Open this device with SentinelGrid Remote
+                Open this device with KenvoryX Remote
               </h2>
               <p id="remote-description" className="mt-2 text-sm leading-6 text-zinc-400">
                 {available

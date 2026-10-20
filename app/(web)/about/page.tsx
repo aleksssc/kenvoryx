@@ -35,7 +35,7 @@ export default function AboutPage() {
 
         <div className="about-badge">
           <Radar size={15} />
-          About SentinelGrid
+          About KenvoryX
         </div>
 
         <h1>
@@ -44,7 +44,7 @@ export default function AboutPage() {
         </h1>
 
         <p>
-          SentinelGrid is built to make infrastructure monitoring simple,
+          KenvoryX is built to make infrastructure monitoring simple,
           clear and accessible from one unified platform.
         </p>
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
 
       {/* =========================================================
-                          WHY SENTINELGRID
+                          WHY KENVORYX
       ========================================================== */}
 
       <section className="about-container">
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <div className="about-story-content">
 
             <span className="about-label">
-              WHY SENTINELGRID
+              WHY KENVORYX
             </span>
 
             <h2>
@@ -76,7 +76,7 @@ export default function AboutPage() {
             </p>
 
             <p>
-              SentinelGrid brings those signals together so you can understand
+              KenvoryX brings those signals together so you can understand
               the health of your infrastructure without switching between
               multiple disconnected tools.
             </p>
@@ -176,7 +176,7 @@ export default function AboutPage() {
           </h2>
 
           <p>
-            SentinelGrid focuses on visibility, simplicity and security
+            KenvoryX focuses on visibility, simplicity and security
             across every part of the platform.
           </p>
 
@@ -230,7 +230,7 @@ export default function AboutPage() {
         <div className="about-direction-text">
 
           <p>
-            SentinelGrid is being built as a unified infrastructure
+            KenvoryX is being built as a unified infrastructure
             monitoring platform for developers, system administrators
             and teams managing online services.
           </p>
@@ -262,7 +262,7 @@ export default function AboutPage() {
           </h2>
 
           <p>
-            Bring your domains, services and infrastructure into SentinelGrid.
+            Bring your domains, services and infrastructure into KenvoryX.
           </p>
 
         </div>

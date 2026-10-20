@@ -789,7 +789,7 @@ export default function InfrastructureSearch() {
             <div className="flex items-center justify-between border-t border-zinc-800 bg-[#0d0f12] px-4 py-2.5">
 
               <span className="text-[10px] text-zinc-600">
-                SentinelGrid Infrastructure Search
+                KenvoryX Infrastructure Search
               </span>
 
               <span className="text-[10px] text-zinc-700">

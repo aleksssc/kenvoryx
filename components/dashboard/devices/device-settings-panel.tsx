@@ -92,14 +92,14 @@ export default function DeviceSettingsPanel({
       <div className="pb-5">
         <p className="sg-eyebrow">Configuration</p>
         <h2 id="device-settings-heading" className="text-base font-semibold tracking-tight text-zinc-100">Device settings</h2>
-        <p className="sg-section-description">Manage how this endpoint is identified and organized in SentinelGrid.</p>
+        <p className="sg-section-description">Manage how this endpoint is identified and organized in KenvoryX.</p>
       </div>
 
       <div className="border-y border-surface-edge">
         <label className="grid gap-3 py-5 sm:grid-cols-[minmax(0,1fr)_minmax(220px,0.9fr)] sm:items-center sm:gap-8">
           <span>
             <span className="block text-sm font-medium text-zinc-200">Display name</span>
-            <span className="mt-1 block text-xs leading-5 text-surface-muted">A custom name shown in SentinelGrid. Leave it blank to use <strong className="font-medium text-zinc-300">{device.hostname}</strong>.</span>
+            <span className="mt-1 block text-xs leading-5 text-surface-muted">A custom name shown in KenvoryX. Leave it blank to use <strong className="font-medium text-zinc-300">{device.hostname}</strong>.</span>
           </span>
           <input
             value={displayName}

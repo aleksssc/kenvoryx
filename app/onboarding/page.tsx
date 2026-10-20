@@ -719,7 +719,7 @@ export default async function OnboardingPage() {
                   text-zinc-600
                 "
               >
-                SentinelGrid
+                KenvoryX
               </p>
 
               <h1
@@ -750,7 +750,7 @@ export default async function OnboardingPage() {
               >
                 You&apos;ve been invited
                 to join an organization
-                on SentinelGrid.
+                on KenvoryX.
               </p>
             </div>
 
@@ -860,7 +860,7 @@ export default async function OnboardingPage() {
                         text-zinc-500
                       "
                     >
-                      SentinelGrid organization
+                      KenvoryX organization
                     </p>
                   </div>
                 </div>
@@ -1205,7 +1205,7 @@ export default async function OnboardingPage() {
                   text-zinc-600
                 "
               >
-                SentinelGrid
+                KenvoryX
               </p>
 
               <h1

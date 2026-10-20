@@ -79,7 +79,7 @@ export default function DashboardSidebar({ organizationId }: { organizationId: s
   function content(mobile: boolean) {
     return <>
       <div className="sg-sidebar-brand">
-        <Link href="/dashboard" aria-label="SentinelGrid overview" onClick={() => setMobileOpen(false)}>
+        <Link href="/dashboard" aria-label="KenvoryX overview" onClick={() => setMobileOpen(false)}>
           <BrandLogo variant="mark" className="sg-sidebar-mark" />
           <BrandLogo variant="lockup" className="sg-sidebar-lockup" />
         </Link>

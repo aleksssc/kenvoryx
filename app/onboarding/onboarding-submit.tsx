@@ -249,7 +249,7 @@ export default function OnboardingSubmit({
             >
               {isJoin
                 ? "Setting up your access"
-                : "Preparing SentinelGrid"}
+                : "Preparing KenvoryX"}
             </p>
 
             {/* LOADER DOTS */}

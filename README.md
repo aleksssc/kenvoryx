@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="./public/logos/sentinelgrid-mark.svg" alt="SentinelGrid" width="86" />
+<img src="./public/logos/kenvoryx-mark.svg" alt="KenvoryX" width="86" />
 
-SentinelGrid
+KenvoryX
 
-Monitor infrastructure. Manage endpoints. Respond remotely.
+Monitor. Manage. Secure.
 
 A modern RMM + monitoring platform for IT teams, MSPs and organizations.
 
@@ -16,7 +16,7 @@ A modern RMM + monitoring platform for IT teams, MSPs and organizations.
 
 <br />
 
-<img src="./public/og-image.png" alt="SentinelGrid" width="100%" />
+<img src="./public/og-image.png" alt="KenvoryX" width="100%" />
 
 <br />
 
@@ -31,15 +31,15 @@ Roadmap
 
 ⚡ Overview
 
-SentinelGrid is a multi-tenant infrastructure monitoring and remote-management platform built to bring the day-to-day work of IT operations into a single interface.
+KenvoryX is a multi-tenant infrastructure monitoring and remote-management platform built to bring the day-to-day work of IT operations into a single interface.
 
-Instead of jumping between monitoring dashboards, remote tools, inventory systems and audit logs, SentinelGrid brings them together:
+Instead of jumping between monitoring dashboards, remote tools, inventory systems and audit logs, KenvoryX brings them together:
 
           MONITOR
              │
              ▼
    ┌───────────────────┐
-   │   SentinelGrid    │
+   │   KenvoryX    │
    └───────────────────┘
       ▲             ▲
       │             │
@@ -71,7 +71,7 @@ signed Agent lifecycle and updates
 
 The goal: know what is happening, understand what changed, and act safely from one place.
 
-✨ What SentinelGrid does
+✨ What KenvoryX does
 
 <table>
 <tr>
@@ -197,7 +197,7 @@ Subscription state
 
 🧭 Product map
 
-SentinelGrid
+KenvoryX
 │
 ├── Dashboard
 │
@@ -231,9 +231,9 @@ flowchart TB
     Redis["Upstash Redis"]
     Realtime["Realtime Relay<br/>Railway"]
     RDPRelay["RDP Relay"]
-    Agent["SentinelGridAgent<br/>Windows / Go"]
-    Updater["SentinelGridUpdater"]
-    RDP["SentinelGridRDP"]
+    Agent["__LEGACY_KenvoryXAgent__<br/>Windows / Go"]
+    Updater["__LEGACY_KenvoryXUpdater__"]
+    RDP["__LEGACY_KenvoryXRDP__"]
 
     Browser --> Web
     Web --> DB
@@ -293,7 +293,7 @@ Persistent realtime connections are intentionally hosted outside Vercel. The Nex
 
 🔐 Security & access
 
-SentinelGrid uses organization-aware authorization throughout the platform.
+KenvoryX uses organization-aware authorization throughout the platform.
 
 flowchart LR
     U["User"] --> M["Membership"]
@@ -409,7 +409,7 @@ heartbeats continue
 monitoring continues
 new devices are blocked
 
-SentinelGrid does not delete infrastructure because of a billing change.
+KenvoryX does not delete infrastructure because of a billing change.
 
 🖥️ Windows Agent
 
@@ -421,7 +421,7 @@ Current repository version: 0.1.12
 
 The Agent is written in Go and runs as a Windows service:
 
-SentinelGridAgent
+__LEGACY_KenvoryXAgent__
 
 It handles:
 
@@ -507,7 +507,7 @@ They are delivered through the realtime command pipeline and recorded in Device 
 
 💻 Remote Terminal
 
-SentinelGrid supports both:
+KenvoryX supports both:
 
 PowerShell
 CMD
@@ -544,10 +544,10 @@ organization entitlement state
 RDP uses an outbound architecture so managed endpoints do not need a publicly exposed inbound RDP port.
 
 flowchart LR
-    Client["Remote Client"] --> API["SentinelGrid API"]
+    Client["Remote Client"] --> API["KenvoryX API"]
     API --> Client
     Client <--> Relay["RDP Relay"]
-    Endpoint["SentinelGridRDP"] <--> Relay
+    Endpoint["__LEGACY_KenvoryXRDP__"] <--> Relay
     Endpoint <--> Windows["Windows RDP"]
 
 The current RDP design includes:
@@ -643,7 +643,7 @@ monitor failures
 
 missing monitor checks
 
-SentinelGrid does not yet pretend to be a full ITSM/ticketing platform. Assignment, acknowledgement, escalation and advanced notification rules are later roadmap items.
+KenvoryX does not yet pretend to be a full ITSM/ticketing platform. Assignment, acknowledgement, escalation and advanced notification rules are later roadmap items.
 
 🧾 Activity & Audit
 
@@ -657,7 +657,7 @@ Update evidence
 
 Records are correlated when reliable IDs exist.
 
-SentinelGrid deliberately avoids inventing:
+KenvoryX deliberately avoids inventing:
 
 versions
 
@@ -673,9 +673,9 @@ Audit data remains separate from rolling telemetry.
 
 The full-product MSI contains:
 
-SentinelGridAgent.exe
-SentinelGridUpdater.exe
-SentinelGridRDP.exe
+__LEGACY_KenvoryXAgent__.exe
+__LEGACY_KenvoryXUpdater__.exe
+__LEGACY_KenvoryXRDP__.exe
 
 The secure update flow includes:
 
@@ -741,7 +741,7 @@ npm run test:realtime
 
 🎨 Dashboard
 
-SentinelGrid uses a shared dark operational design system.
+KenvoryX uses a shared dark operational design system.
 
 Current appearance presets:
 
@@ -1144,9 +1144,9 @@ What can we safely do remotely?
 
 <br />
 
-<img src="./public/logos/sentinelgrid-mark.svg" alt="SentinelGrid" width="58" />
+<img src="./public/logos/kenvoryx-mark.svg" alt="KenvoryX" width="58" />
 
-SentinelGrid
+KenvoryX
 
 Visibility. Control. Security.
 
@@ -1205,3 +1205,6 @@ Quotas run inside PostgreSQL for clients, devices, monitors, members and pending
 - `npm run lint` and `npm run build`. The existing repository has no default `test` or `typecheck` script; `npx tsc --noEmit` is available.
 
 Remaining rollout qualification: authenticated owner/admin/member browser scenarios against the migrated database, real Checkout completion and signed webhook delivery, simultaneous separate database connections contending at quota boundaries, and production Stripe settings. The SQL snapshot omitted complete grants and some constraints; inspect any production drift before rollout. No Agent/RDP index cleanup or MFA is part of billing.
+
+
+> **Compatibility:** Existing Windows binaries, MSI products, update manifests and environment variables may still use legacy `SentinelGrid*` identifiers during the staged migration. The public website and product identity are **KenvoryX**.

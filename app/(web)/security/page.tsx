@@ -44,7 +44,7 @@ export default function SecurityPage() {
         </h1>
 
         <p>
-          SentinelGrid is built with security in mind from authentication
+          KenvoryX is built with security in mind from authentication
           to infrastructure monitoring and data isolation.
         </p>
 
@@ -75,7 +75,7 @@ export default function SecurityPage() {
             </h2>
 
             <p>
-              SentinelGrid is designed to minimize unnecessary access,
+              KenvoryX is designed to minimize unnecessary access,
               isolate user data and securely manage authentication
               across the platform.
             </p>
@@ -153,7 +153,7 @@ export default function SecurityPage() {
             icon={<Eye size={21} />}
             label="VISIBILITY"
             title="Only the data you need."
-            description="SentinelGrid is designed to collect only the information necessary to monitor your infrastructure."
+            description="KenvoryX is designed to collect only the information necessary to monitor your infrastructure."
           />
 
           <SecurityCard
@@ -192,7 +192,7 @@ export default function SecurityPage() {
           </h2>
 
           <p>
-            SentinelGrid follows a simple principle: users and services
+            KenvoryX follows a simple principle: users and services
             should only access what they actually need.
           </p>
 
@@ -210,7 +210,7 @@ export default function SecurityPage() {
           <SecurityPrinciple
             number="02"
             title="Data isolation"
-            description="Monitoring data is associated with its owner and separated from other SentinelGrid accounts."
+            description="Monitoring data is associated with its owner and separated from other KenvoryX accounts."
           />
 
           <SecurityPrinciple
@@ -247,7 +247,7 @@ export default function SecurityPage() {
           </h2>
 
           <p>
-            Start monitoring your infrastructure with SentinelGrid.
+            Start monitoring your infrastructure with KenvoryX.
           </p>
 
         </div>

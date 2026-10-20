@@ -344,7 +344,7 @@ export default function DeviceTerminal({
           "stderr",
 
         text:
-          "SentinelGrid: could not send the command.",
+          "KenvoryX: could not send the command.",
       });
     }
   }
@@ -656,7 +656,7 @@ export default function DeviceTerminal({
                 text:
                   online
                     ? `Connected to ${deviceName}.`
-                    : `Connected to SentinelGrid, but ${deviceName} is offline.`,
+                    : `Connected to KenvoryX, but ${deviceName} is offline.`,
               });
 
               if (
@@ -826,7 +826,7 @@ export default function DeviceTerminal({
                   "stderr",
 
                 text:
-                  `SentinelGrid: ${errorMessage}`,
+                  `KenvoryX: ${errorMessage}`,
               });
             }
           } catch (
@@ -1162,7 +1162,7 @@ export default function DeviceTerminal({
           {entries.length ===
           0 ? (
             <p className="text-zinc-700">
-              SentinelGrid remote terminal
+              KenvoryX remote terminal
             </p>
           ) : (
             entries.map(
@@ -1339,7 +1339,7 @@ export default function DeviceTerminal({
             </span>
 
             <span>
-              Commands run through the SentinelGrid Agent
+              Commands run through the KenvoryX Agent
             </span>
 
           </div>

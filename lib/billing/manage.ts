@@ -491,7 +491,7 @@ export async function manageBilling(
 
                     /*
                      * Subscription lifecycle is
-                     * managed inside SentinelGrid.
+                     * managed inside KenvoryX.
                      */
                     subscription_cancel: {
                       enabled:

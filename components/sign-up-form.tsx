@@ -93,7 +93,7 @@ export function SignUpForm() {
         </div>
 
         <h1 className="text-3xl font-bold tracking-tight">
-          Join SentinelGrid
+          Join KenvoryX
         </h1>
 
         <p className="mt-2 text-sm text-zinc-500">

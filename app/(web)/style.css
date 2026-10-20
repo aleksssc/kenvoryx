@@ -1,5 +1,54 @@
+/* Home hero starts at the top of the viewport, behind the fixed glass header.
+   The spacer is cancelled only on the homepage; other marketing pages retain it. */
+.kv-home-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin-top: calc(-1 * var(--kv-header-offset, 102px));
+    isolation: isolate;
+    overflow: hidden;
+    background: #050709;
+}
+
+.kv-home-hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.kv-home-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1280px;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin-inline: auto;
+    padding: calc(var(--kv-header-offset, 102px) + 28px) clamp(24px, 5vw, 64px) clamp(56px, 8vh, 104px);
+}
+
+.kv-home-hero .hero-grid {
+    position: absolute;
+    inset: 0;
+    /* Previous bottom gradient was masking the grid before the fold. */
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+@media (max-width: 640px) {
+    .kv-home-hero-content {
+        padding-inline: 24px;
+        padding-bottom: 64px;
+    }
+}
+
 /* =========================================================
-                    SENTINELGRID HERO
+                    KENVORYX HERO
 ========================================================= */
 
 .hero-grid {
@@ -70,7 +119,7 @@
     top: -300px;
     right: 5%;
 
-    background: #10b981;
+    background: #0789e7;
 }
 
 
@@ -118,12 +167,12 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(16, 185, 129, 0.5),
+            rgba(0, 196, 255, 0.5),
             transparent
         );
 
     box-shadow:
-        0 0 25px rgba(16, 185, 129, 0.15);
+        0 0 25px rgba(0, 196, 255, 0.15);
 
     animation:
         hero-scan 8s ease-in-out infinite;

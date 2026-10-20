@@ -84,7 +84,7 @@ export default function DeviceActionsMenu({ device, busy, online, access, open, 
               const reason = !online ? "Device is offline" : busy ? "Another device command is already running" : error || availability?.[action.type];
               const confirmation = action.type === "reboot" ? `Restart ${name}? Open work may be lost. Windows will restart in 30 seconds.` :
                 action.type === "shutdown" ? `Shut down ${name}? Open work may be lost. Windows will shut down in 30 seconds; physical access may be needed to turn it on again.` :
-                action.type === "restart_agent" ? `Restart SentinelGrid Agent on ${name}? Monitoring will briefly disconnect.` :
+                action.type === "restart_agent" ? `Restart KenvoryX Agent on ${name}? Monitoring will briefly disconnect.` :
                 action.type === "update_agent" ? `Check for and install the newest permitted Agent release on ${name}?` : undefined;
               return (
                 <DropdownMenuItem key={action.type} aria-disabled={Boolean(reason)} title={reason || undefined}

@@ -85,7 +85,7 @@ export default function Loading() {
             text-zinc-300
           "
         >
-          SentinelGrid
+          KenvoryX
         </p>
 
         <div className="mt-4 flex items-center gap-2">

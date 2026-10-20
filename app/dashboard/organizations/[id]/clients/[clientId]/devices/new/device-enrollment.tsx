@@ -168,12 +168,12 @@ export default function DeviceEnrollment({
           <div>
 
             <h2 className="sg-section-title text-white">
-              Deploy SentinelGrid Agent
+              Deploy Kenvoryx Agent
             </h2>
 
             <p className="mt-1 text-sm text-surface-muted">
               Generate and download
-              the SentinelGrid Agent
+              the Kenvoryx Agent
               installer for this
               device.
             </p>
@@ -533,7 +533,7 @@ export default function DeviceEnrollment({
                     </p>
 
                     <p className="mt-1 text-xs text-surface-muted">
-                      SentinelGrid Agent
+                      Kenvoryx Agent
                       · x64 · MSI
                     </p>
 

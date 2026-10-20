@@ -198,7 +198,7 @@ function useCheckoutTheme() {
      * using data-sg-theme.
      *
      * Observe changes so an already-open Checkout also
-     * follows the newly selected SentinelGrid theme.
+     * follows the newly selected Kenvoryx theme.
      */
     const observer =
       new MutationObserver(
@@ -495,7 +495,7 @@ function CheckoutForm({
         </span>
 
         <span>
-          SentinelGrid
+          Kenvoryx
         </span>
       </div>
     </form>

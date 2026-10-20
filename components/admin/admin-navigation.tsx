@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";\nimport { BrandLogo } from "@/components/brand-logo";
+import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { usePathname } from "next/navigation";
 import {
   Activity,
@@ -10,7 +11,6 @@ import {
   Gauge,
   Menu,
   RadioTower,
-  Shield,
   Users,
   X,
 } from "lucide-react";

@@ -1,78 +1,140 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Eye, EyeOff, KeyRound, Loader2, LockKeyhole } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export function UpdatePasswordForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [password, setPassword] = useState("");
+  const [confirmation, setConfirmation] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
+  async function handleUpdatePassword(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isLoading) return;
     setError(null);
 
+    if (password.length < 8) {
+      setError("Your password must contain at least 8 characters.");
+      return;
+    }
+    if (password !== confirmation) {
+      setError("The passwords do not match.");
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      const { error } = await supabase.auth.updateUser({ password });
-      if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/dashboard");
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-    } finally {
+      const supabase = createClient();
+      const { error: updateError } = await supabase.auth.updateUser({ password });
+      if (updateError) throw updateError;
+      router.replace("/dashboard");
+      router.refresh();
+    } catch (cause: unknown) {
+      setError(cause instanceof Error ? cause.message : "Could not update your password.");
       setIsLoading(false);
     }
-  };
+  }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-          <CardDescription>
-            Please enter your new password below.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleForgotPassword}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="password">New password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="New password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Saving..." : "Save new password"}
-              </Button>
+    <div className={cn("kv-auth-page", className)} {...props}>
+      <div className="kv-auth-heading">
+        <span className="kv-auth-eyebrow">Secure your account</span>
+        <h1 className="kv-auth-title">
+          Choose a new <span className="kv-auth-title-accent">password</span>
+        </h1>
+        <p className="kv-auth-subtitle">
+          Set a strong password to continue using KenvoryX.
+        </p>
+      </div>
+
+      <section className="kv-auth-card" aria-label="Set a new password">
+        <form className="kv-auth-form" onSubmit={handleUpdatePassword}>
+          <div className="kv-auth-field">
+            <label htmlFor="new-password" className="kv-auth-label">New password</label>
+            <div className="kv-auth-input-frame">
+              <LockKeyhole size={18} className="kv-auth-input-icon" aria-hidden="true" />
+              <input
+                id="new-password"
+                name="new-password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                required
+                minLength={8}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Minimum 8 characters"
+                className="kv-auth-input"
+              />
+              <button
+                type="button"
+                className="kv-auth-visibility-toggle"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+              </button>
             </div>
-          </form>
-        </CardContent>
-      </Card>
+          </div>
+
+          <div className="kv-auth-field">
+            <label htmlFor="confirm-new-password" className="kv-auth-label">Confirm new password</label>
+            <div className="kv-auth-input-frame">
+              <LockKeyhole size={18} className="kv-auth-input-icon" aria-hidden="true" />
+              <input
+                id="confirm-new-password"
+                name="confirm-new-password"
+                type={showConfirmation ? "text" : "password"}
+                autoComplete="new-password"
+                required
+                minLength={8}
+                value={confirmation}
+                onChange={(event) => setConfirmation(event.target.value)}
+                placeholder="Repeat your new password"
+                className="kv-auth-input"
+              />
+              <button
+                type="button"
+                className="kv-auth-visibility-toggle"
+                onClick={() => setShowConfirmation((current) => !current)}
+                aria-label={showConfirmation ? "Hide confirmation password" : "Show confirmation password"}
+                aria-pressed={showConfirmation}
+              >
+                {showConfirmation ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+              </button>
+            </div>
+          </div>
+
+          {error && <div role="alert" className="kv-auth-alert">{error}</div>}
+
+          <button type="submit" className="kv-auth-submit" disabled={isLoading}>
+            <span className="kv-auth-submit-content">
+              {isLoading ? (
+                <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Saving...</>
+              ) : (
+                <><KeyRound size={18} aria-hidden="true" /> Save new password</>
+              )}
+            </span>
+          </button>
+        </form>
+
+        <div className="kv-auth-footer">
+          <Link href="/auth/login" className="kv-auth-return-link">
+            <ArrowLeft size={15} aria-hidden="true" /> Back to sign in
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

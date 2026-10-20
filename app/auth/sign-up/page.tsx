@@ -2,7 +2,7 @@ import { SignUpForm } from "@/components/sign-up-form";
 
 export default function SignUpPage() {
   return (
-    <div className="w-full max-w-md">
+    <div className="flex w-full min-w-0 justify-center">
       <SignUpForm />
     </div>
   );

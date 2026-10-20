@@ -315,7 +315,7 @@
   font-weight: 750;
   isolation: isolate;
   overflow: hidden;
-  animation: kv-auth-field-appear .6s cubic-bezier(.22, 1, .36, 1) .46s both;
+  animation: kv-auth-button-appear .62s ease-out .46s both;
   box-shadow: 0 9px 23px rgba(0, 117, 244, .18), 0 0 17px rgba(12, 178, 247, .12);
   transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
 }
@@ -370,6 +370,10 @@
 @keyframes kv-auth-field-appear {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes kv-auth-button-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 @keyframes kv-auth-card-float {
   0%, 100% { transform: translateY(0); }

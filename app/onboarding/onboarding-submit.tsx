@@ -249,7 +249,7 @@ export default function OnboardingSubmit({
             >
               {isJoin
                 ? "Setting up your access"
-                : "Preparing Kenvoryx"}
+                : "Preparing KenvoryX"}
             </p>
 
             {/* LOADER DOTS */}

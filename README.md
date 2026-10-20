@@ -16,7 +16,7 @@ A modern RMM + monitoring platform for IT teams, MSPs and organizations.
 
 <br />
 
-<img src="./public/og-image.png" alt="KenvoryX" width="100%" />
+<img src="./public/logos/kenvoryx-lockup.svg" alt="KenvoryX — Monitor. Manage. Secure." width="780" />
 
 <br />
 
@@ -917,7 +917,7 @@ WiX Toolset
 
 Setup
 
-git clone https://github.com/aleksssc/sentinelgrid.git
+git clone https://github.com/aleksssc/kenvoryx.git
 cd sentinelgrid
 
 npm install
@@ -1179,9 +1179,9 @@ where p.proname='create_default_account_subscription' and not t.tgisinternal;
 
 ### Stripe and environment
 
-Copy the variable names in `.env.example` into the deployment environment. Server-only: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SUPABASE_SERVICE_ROLE_KEY` (or the existing `SUPABASE_SECRET_KEY`). Public: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (reserved for future embedded payment UI; hosted Checkout needs no browser SDK). Set the Pro/Business Product and Price IDs through their four `STRIPE_*_PRODUCT_ID` / `STRIPE_*_PRICE_ID` variables. Never mix test and live mode IDs/keys. Production Checkout validates that the configured Stripe price matches the public EUR/month catalog; changing a price requires a new Stripe Price and updating its ENV ID.
+Configure the single public app-origin variable `NEXT_PUBLIC_SITE_URL` (HTTPS and no path) in Vercel for the relevant environment. It is used for website metadata and Stripe return URLs. When deploying previews without that setting, metadata may fall back to the Vercel preview hostname; billing still requires the variable. Copy the remaining variable names in `.env.example` into the deployment environment. Server-only: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SUPABASE_SERVICE_ROLE_KEY` (or the existing `SUPABASE_SECRET_KEY`). Public: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (reserved for future embedded payment UI; hosted Checkout needs no browser SDK). Set the Pro/Business Product and Price IDs through their four `STRIPE_*_PRODUCT_ID` / `STRIPE_*_PRICE_ID` variables. Never mix test and live mode IDs/keys. Production Checkout validates that the configured Stripe price matches the public EUR/month catalog; changing a price requires a new Stripe Price and updating its ENV ID.
 
-Register `https://sentinelgrid-one.vercel.app/api/stripe/webhook` for:
+Register the endpoint `/api/stripe/webhook` under the public origin configured in `NEXT_PUBLIC_SITE_URL` for:
 
 - `checkout.session.completed`, `checkout.session.expired` (release abandoned Checkout reservations)
 - `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`

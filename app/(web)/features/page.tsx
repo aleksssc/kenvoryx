@@ -31,7 +31,7 @@ export default function FeaturesPage() {
 
                 <p>
                     Monitor websites, domains, certificates and services
-                    from a single platform. Kenvoryx helps you detect
+                    from a single platform. KenvoryX helps you detect
                     problems before they become incidents.
                 </p>
 
@@ -240,7 +240,7 @@ export default function FeaturesPage() {
                             </h2>
 
                             <p>
-                                Kenvoryx automatically identifies
+                                KenvoryX automatically identifies
                                 incidents and keeps you informed when
                                 infrastructure requires attention.
                             </p>
@@ -303,7 +303,7 @@ export default function FeaturesPage() {
                     </h2>
 
                     <p>
-                        Start monitoring your infrastructure with Kenvoryx.
+                        Start monitoring your infrastructure with KenvoryX.
                     </p>
 
                 </div>

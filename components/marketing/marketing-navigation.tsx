@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  ArrowUpRight,
-  ChevronRight,
   CreditCard,
   House,
   Info,
@@ -170,10 +168,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
         inert={!mobileOpen}
         tabIndex={-1}
       >
-        <div className="kv-mobile-menu-heading">
-          <span>Explore KenvoryX</span>
-          <ArrowUpRight size={14} aria-hidden="true" />
-        </div>
+        <div className="kv-mobile-menu-heading">Navigation</div>
 
         <nav className="kv-mobile-nav" aria-label="Mobile navigation">
           {links.map((link, index) => {
@@ -191,9 +186,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
               >
                 <span className="kv-mobile-link-icon"><ItemIcon size={18} aria-hidden="true" /></span>
                 <span className="kv-mobile-link-label">{link.label}</span>
-                {isActive
-                  ? <span className="kv-mobile-active-dot" aria-hidden="true" />
-                  : <ChevronRight className="kv-mobile-chevron" size={16} aria-hidden="true" />}
+
               </Link>
             );
           })}

@@ -119,11 +119,13 @@ export function LoginForm() {
           {error && <div role="alert" className="kv-auth-alert">{error}</div>}
 
           <button type="submit" disabled={loading} className="kv-auth-submit">
+            <span className="kv-auth-submit-content">
             {loading ? (
               <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Signing in...</>
             ) : (
               <><LogIn size={18} aria-hidden="true" /> Sign in</>
             )}
+          </span>
           </button>
         </form>
 

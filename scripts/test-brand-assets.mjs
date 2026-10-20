@@ -48,7 +48,7 @@ test("mark and wordmark preserve accessible naming and class overrides", () => {
   const mark = renderLogo({ className: "h-9 w-9" });
   assert.match(mark, /alt="KenvoryX"/);
   assert.match(mark, /width="350" height="365"/);
-  assert.match(mark, /class="shrink-0 object-contain h-8 w-8 h-9 w-9"/);
+  assert.match(mark, /class="shrink-0 object-contain h-9 w-9"/);
   const wordmark = renderLogo({ variant: "wordmark" });
   assert.match(wordmark, /Kenvory<span[^>]*>X<\/span>/);
   assert.match(renderLogo({ decorative: true }), /alt=""/);

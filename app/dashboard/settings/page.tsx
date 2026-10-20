@@ -13,7 +13,7 @@ export default function SettingsPage() {
         <PageHeader
           title="Settings"
           eyebrow="Workspace"
-          description="Customize the SentinelGrid interface on this browser."
+          description="Customize the Kenvoryx interface on this browser."
           icon={
             <Settings2 size={23} />
           }

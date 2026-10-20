@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { AppearanceProvider } from "@/components/dashboard/appearance-provider";
+import { getSiteOrigin } from "@/lib/site-origin";
 import "./globals.css";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "https://sentinelgrid-one.vercel.app/";
+const defaultUrl = getSiteOrigin();
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),

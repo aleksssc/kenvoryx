@@ -1,6 +1,7 @@
 import "server-only";
 import Stripe from "stripe";
 import { PLANS } from "@/lib/plans";
+import { getSiteOrigin } from "@/lib/site-origin";
 export type PaidPlan = "pro" | "business";
 export function isPaidPlan(value: unknown): value is PaidPlan { return value === "pro" || value === "business"; }
 export function requiredEnv(name: string) {
@@ -13,9 +14,8 @@ export function getStripe() {
   return client ??= new Stripe(requiredEnv("STRIPE_SECRET_KEY"), { maxNetworkRetries: 2, timeout: 15000 });
 }
 export function siteURL() {
-  const url = new URL(requiredEnv("NEXT_PUBLIC_SITE_URL"));
-  if (url.username || url.password || (url.protocol !== "https:" && !(url.protocol === "http:" && url.hostname === "localhost"))) throw new Error("Invalid NEXT_PUBLIC_SITE_URL");
-  return url.origin;
+  // Billing must never use an implicit preview or localhost fallback in production.
+  return getSiteOrigin({ requireConfigured: true });
 }
 export function priceId(plan: PaidPlan) { return requiredEnv(plan === "pro" ? "STRIPE_PRO_PRICE_ID" : "STRIPE_BUSINESS_PRICE_ID"); }
 export function planForPrice(id: string): PaidPlan {

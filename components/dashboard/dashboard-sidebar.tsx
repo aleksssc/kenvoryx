@@ -5,14 +5,17 @@ import { useEffect, useRef, useState, type ElementType } from "react";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/brand-logo";
 import { useAppearance } from "@/components/dashboard/appearance-provider";
-import { LayoutDashboard, Activity, Building2, Globe2, TriangleAlert, Bell, Bot, Wrench, ChevronRight, Menu, X, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { LayoutDashboard, Activity, Building2, Globe2, TriangleAlert, Bell, Bot, BrainCircuit, Wrench, ChevronRight, Menu, X, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
 const operations = [
   { name: "Incidents", href: "/dashboard/incidents", icon: TriangleAlert },
   { name: "Alerts", href: "/dashboard/alerts", icon: Bell },
   { name: "Agents", href: "/dashboard/agents", icon: Bot },
 ];
-const utilities = [{ name: "Tools", href: "/dashboard/tools", icon: Wrench }];
+const utilities = [
+  { name: "KenvoryX AI", href: "/dashboard/ai", icon: BrainCircuit },
+  { name: "Tools", href: "/dashboard/tools", icon: Wrench },
+];
 
 type SidebarLink = { name: string; href: string; icon: ElementType; exact?: boolean };
 

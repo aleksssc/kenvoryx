@@ -1,3 +1,4 @@
+import { MarketingAtmosphere } from "@/components/marketing/marketing-atmosphere";
 import Link from "next/link";
 import "./about.css";
 import {
@@ -11,7 +12,8 @@ import {
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
+    <main className="about-page kv-subpage kv-subpage-about">
+      <MarketingAtmosphere />
 
       {/* =========================================================
                             BACKGROUND
@@ -57,7 +59,7 @@ export default function AboutPage() {
 
       <section className="about-container">
 
-        <div className="about-story">
+        <div className="about-story" data-kv-reveal>
 
           <div className="about-story-content">
 
@@ -212,7 +214,7 @@ export default function AboutPage() {
                               GOAL
       ========================================================== */}
 
-      <section className="about-direction">
+      <section className="about-direction" data-kv-reveal>
 
         <div>
 
@@ -249,7 +251,7 @@ export default function AboutPage() {
                               CTA
       ========================================================== */}
 
-      <section className="about-cta">
+      <section className="about-cta" data-kv-reveal>
 
         <div>
 
@@ -290,7 +292,7 @@ function AboutCard({
   description: string;
 }) {
   return (
-    <article className="about-card">
+    <article className="about-card" data-kv-reveal>
 
       <div className="about-card-icon">
         {icon}

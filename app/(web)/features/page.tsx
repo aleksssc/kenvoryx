@@ -1,3 +1,4 @@
+import { MarketingAtmosphere } from "@/components/marketing/marketing-atmosphere";
 import {
     Activity,
     Bell,
@@ -13,7 +14,8 @@ import Link from "next/link";
 export default function FeaturesPage() {
 
     return (
-        <main className="features-page">
+        <main className="features-page kv-subpage kv-subpage-features">
+      <MarketingAtmosphere />
 
             {/* HERO */}
 
@@ -46,7 +48,7 @@ export default function FeaturesPage() {
 
                     {/* DOMAIN */}
 
-                    <div className="feature-card feature-card-large">
+                    <div className="feature-card feature-card-large" data-kv-reveal>
 
                         <div className="feature-text">
 
@@ -127,7 +129,7 @@ export default function FeaturesPage() {
 
                     {/* UPTIME */}
 
-                    <div className="feature-card">
+                    <div className="feature-card" data-kv-reveal>
 
                         <div className="feature-icon">
                             <Activity size={21} />
@@ -151,7 +153,7 @@ export default function FeaturesPage() {
 
                     {/* SSL */}
 
-                    <div className="feature-card">
+                    <div className="feature-card" data-kv-reveal>
 
                         <div className="feature-icon">
                             <ShieldCheck size={21} />
@@ -175,7 +177,7 @@ export default function FeaturesPage() {
 
                     {/* DNS */}
 
-                    <div className="feature-card">
+                    <div className="feature-card" data-kv-reveal>
 
                         <div className="feature-icon">
                             <Network size={21} />
@@ -199,7 +201,7 @@ export default function FeaturesPage() {
 
                     {/* SECURITY */}
 
-                    <div className="feature-card">
+                    <div className="feature-card" data-kv-reveal>
 
                         <div className="feature-icon">
                             <Shield size={21} />
@@ -292,7 +294,7 @@ export default function FeaturesPage() {
 
             {/* CTA */}
 
-            <section className="features-cta">
+            <section className="features-cta" data-kv-reveal>
 
                 <div>
 

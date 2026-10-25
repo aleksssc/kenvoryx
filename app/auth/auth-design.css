@@ -463,3 +463,102 @@
   .kv-auth-shell * { scroll-behavior: auto; }
   .kv-auth-submit, .kv-auth-back, .kv-auth-input-frame { transition: none; }
 }
+
+
+/* =========================================================
+   SHARED FLOATING NAVIGATION · LOGIN AND SIGN-UP
+   Reuses the exact nav from the marketing pages (desktop/mobile).
+   ========================================================= */
+.kv-auth-shell.kv-marketing-shell {
+  --kv-header-offset: 102px;
+  min-height: 100svh;
+}
+.kv-auth-shell .kv-site-header {
+  z-index: 90;
+}
+.kv-auth-shell .kv-auth-main {
+  z-index: 1;
+  box-sizing: border-box;
+  min-height: 100svh;
+  padding: calc(var(--kv-header-offset) + 36px) 22px 76px;
+  flex-direction: column;
+  gap: 20px;
+}
+.kv-auth-shell .kv-auth-main > div {
+  flex: 0 0 auto;
+}
+.kv-auth-shell .kv-auth-visual {
+  z-index: 0;
+}
+.kv-auth-shell .kv-auth-page {
+  position: relative;
+  z-index: 1;
+}
+.kv-auth-shell .kv-auth-card {
+  background: linear-gradient(150deg, #0e1b2e 0%, #081322 66%, #07101c 100%);
+  border-color: rgba(91, 151, 205, .28);
+}
+.kv-auth-shell .kv-auth-signature {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #7591aa;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+.kv-auth-signature span {
+  height: 3px;
+  width: 3px;
+  flex: none;
+  border-radius: 50%;
+  background: #299bd3;
+}
+.kv-auth-shell .kv-auth-scan-line {
+  position: absolute;
+  inset: 12% 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(14,147,240,.16) 22%, rgba(25,175,240,.28) 50%, rgba(14,147,240,.16) 78%, transparent);
+  box-shadow: 0 0 15px rgba(12,133,238,.08);
+  opacity: 0;
+  animation: kv-auth-scan 11s ease-in-out infinite;
+}
+@keyframes kv-auth-scan {
+  0% { top: 12%; opacity: 0; }
+  16%,84% { opacity: .65; }
+  100% { top: 87%; opacity: 0; }
+}
+.kv-auth-skip-link {
+  position: fixed;
+  z-index: 120;
+  top: -100px;
+  left: 24px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: #04111b;
+  background: #e6f5ff;
+}
+.kv-auth-skip-link:focus { top: 8px; }
+@media (max-width: 1020px) {
+  .kv-auth-shell.kv-marketing-shell { --kv-header-offset: 92px; }
+  .kv-auth-shell .kv-auth-main {
+    padding-top: calc(var(--kv-header-offset) + 28px);
+    padding-bottom: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .kv-auth-shell .kv-auth-main {
+    padding: calc(var(--kv-header-offset) + 24px) 15px 38px;
+  }
+  .kv-auth-shell .kv-auth-signature {
+    font-size: 9px;
+  }
+}
+@media (max-width: 440px) {
+  .kv-auth-shell.kv-marketing-shell { --kv-header-offset: 81px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kv-auth-shell .kv-auth-scan-line { animation: none; }
+}

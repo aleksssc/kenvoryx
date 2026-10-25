@@ -4,25 +4,40 @@
   --kv-accent: 40, 169, 227;
   position: relative;
   isolation: isolate;
+  /* Extend the shared backdrop beneath the fixed navigation without moving content. */
+  margin-top: calc(-1 * var(--kv-header-offset, 102px));
+  padding-top: var(--kv-header-offset, 102px);
   background: #05080d;
 }
 .kv-subpage.kv-subpage-security { --kv-accent: 47, 187, 158; }
 .kv-subpage.kv-subpage-about { --kv-accent: 88, 151, 230; }
 .kv-subpage-atmosphere {
-  position: absolute;
+  /* A true viewport background, not a 980px-tall overlay that ends midway through the page. */
+  position: fixed;
   z-index: 0;
-  inset: 0 0 auto;
-  height: min(980px, 125vh);
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
   pointer-events: none;
   overflow: hidden;
+}
+/* The legacy one-off page backgrounds are superseded by this shared full-screen layer. */
+.kv-subpage :is(.pricing-background,.security-background,.about-background) {
+  display: none;
+}
+/* Text and panels sit above the moving line; the global navigation has its own higher layer. */
+.kv-subpage > section {
+  position: relative;
+  z-index: 1;
 }
 .kv-subpage-grid {
   position: absolute;
   inset: 0;
   background-image: linear-gradient(rgba(190,225,246,.036) 1px, transparent 1px), linear-gradient(90deg,rgba(190,225,246,.036) 1px, transparent 1px);
   background-size: 56px 56px;
-  -webkit-mask-image: linear-gradient(180deg,#000 0%,rgba(0,0,0,.8) 50%,transparent 100%);
-  mask-image: linear-gradient(180deg,#000 0%,rgba(0,0,0,.8) 50%,transparent 100%);
+  /* Keep the grid visible across the ENTIRE viewport rather than fading at the fold. */
+  opacity: .86;
   animation: kv-subpage-grid 26s linear infinite;
 }
 .kv-subpage-glow {
@@ -39,20 +54,21 @@
 .kv-subpage-glow-b { top: 320px; left:-20%; opacity:.055; animation-delay:-7s; }
 .kv-subpage-scan {
   position:absolute;
+  z-index: 0;
   left:0;
   top:8%;
   width:100%;
   height:1px;
-  background:linear-gradient(90deg,transparent 0%,rgba(var(--kv-accent),.08) 15%,rgba(var(--kv-accent),.45) 50%,rgba(var(--kv-accent),.08) 85%,transparent);
-  box-shadow:0 0 21px rgba(var(--kv-accent),.14);
-  animation:kv-subpage-scan 10s ease-in-out infinite;
+  background:linear-gradient(90deg,transparent 0%,rgba(var(--kv-accent),.12) 15%,rgba(var(--kv-accent),.58) 50%,rgba(var(--kv-accent),.12) 85%,transparent);
+  box-shadow:0 0 19px rgba(var(--kv-accent),.19);
+  animation:kv-subpage-scan 9s ease-in-out infinite;
 }
 @keyframes kv-subpage-grid { to { background-position:56px 56px; } }
 @keyframes kv-subpage-drift { to { transform:translate3d(-55px,45px,0) scale(1.12); } }
 @keyframes kv-subpage-scan {
-  0% { top:9%;opacity:0; }
-  15%,85% { opacity:.7; }
-  100% { top:87%;opacity:0; }
+  0% { top:0%;opacity:0; }
+  15%,85% { opacity:.9; }
+  100% { top:100%;opacity:0; }
 }
 /* Same hierarchy, spacing and restrained motion across secondary marketing pages. */
 .kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) {
@@ -86,6 +102,21 @@
   overflow:visible;
   box-shadow:0 15px 55px rgba(0,0,0,.12),inset 0 1px rgba(255,255,255,.025);
   transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease,background .3s ease;
+}
+/* Solid surfaces obscure the scanning line as it travels BEHIND the boards.
+   The old translucent gradients let the grid and beam bleed through text. */
+.kv-marketing-shell .kv-subpage :is(
+  .feature-card,.pricing-card,.security-card,.about-card,
+  .security-main-card,.about-story,.enterprise-card
+) {
+  background: linear-gradient(145deg,#111821 0%,#0d131b 55%,#0b1017 100%);
+  border-color: rgba(164,186,207,.16);
+}
+.kv-marketing-shell .kv-subpage :is(
+  .domain-preview,.alerts-preview,.security-status-panel,.about-monitor-preview
+) {
+  background: #080d14;
+  border-color: rgba(164,186,207,.16);
 }
 .kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card,.security-main-card,.about-story,.enterprise-card):hover {
   border-color:rgba(var(--kv-accent),.26);

@@ -37,7 +37,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
 
   const activeHref = links.find((link) =>
     link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(`${link.href}/`)
-  )?.href ?? "/";
+  )?.href ?? null;
 
   const highlightedHref = hovered ?? activeHref;
 
@@ -50,7 +50,7 @@ export function MarketingNavigation({ auth }: { auth: ReactNode }) {
     const positionIndicator = () => {
       const selected = Array.from(nav.querySelectorAll<HTMLAnchorElement>("a[data-nav-href]"))
         .find((item) => item.dataset.navHref === highlightedHref);
-      if (!selected) return;
+      if (!selected) { setIndicator(null); return; }
       const parent = nav.getBoundingClientRect();
       const current = selected.getBoundingClientRect();
       const left = current.left - parent.left;

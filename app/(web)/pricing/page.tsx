@@ -1,3 +1,4 @@
+import { MarketingAtmosphere } from "@/components/marketing/marketing-atmosphere";
 import Link from "next/link";
 import { PLANS, formatPlanPrice, planMarketingFeatures, SALES_URL } from "@/lib/plans";
 import "./pricing.css";
@@ -16,7 +17,8 @@ const plans = (["free", "pro", "business"] as const).map((slug) => ({
 
 export default function PricingPage() {
   return (
-    <main className="pricing-page">
+    <main className="pricing-page kv-subpage kv-subpage-pricing">
+      <MarketingAtmosphere />
 
       {/* BACKGROUND */}
 
@@ -59,6 +61,7 @@ export default function PricingPage() {
 
       return (
         <article
+          data-kv-reveal
           key={plan.name}
           className={`pricing-card ${
             plan.featured ? "pricing-card-featured" : ""
@@ -143,7 +146,7 @@ export default function PricingPage() {
   {/* ENTERPRISE */}
 {/* ENTERPRISE */}
 
-<div className="enterprise-card">
+<div className="enterprise-card" data-kv-reveal>
 
   <div className="enterprise-info">
 
@@ -219,7 +222,7 @@ export default function PricingPage() {
 
       {/* BOTTOM CTA */}
 
-      <section className="pricing-bottom">
+      <section className="pricing-bottom" data-kv-reveal>
 
         <div>
           <span>NEED MORE?</span>

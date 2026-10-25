@@ -1,3 +1,4 @@
+import { MarketingAtmosphere } from "@/components/marketing/marketing-atmosphere";
 import Link from "next/link";
 import "./security.css";
 import {
@@ -13,7 +14,8 @@ import {
 
 export default function SecurityPage() {
   return (
-    <main className="security-page">
+    <main className="security-page kv-subpage kv-subpage-security">
+      <MarketingAtmosphere />
 
       {/* =========================================================
                           BACKGROUND
@@ -57,7 +59,7 @@ export default function SecurityPage() {
 
       <section className="security-container">
 
-        <div className="security-main-card">
+        <div className="security-main-card" data-kv-reveal>
 
           <div className="security-main-content">
 
@@ -234,7 +236,7 @@ export default function SecurityPage() {
                               CTA
       ========================================================== */}
 
-      <section className="security-cta">
+      <section className="security-cta" data-kv-reveal>
 
         <div>
 
@@ -282,7 +284,7 @@ function SecurityCard({
   description: string;
 }) {
   return (
-    <article className="security-card">
+    <article className="security-card" data-kv-reveal>
 
       <div className="security-icon">
         {icon}
@@ -320,7 +322,7 @@ function SecurityPrinciple({
   description: string;
 }) {
   return (
-    <div className="security-principle">
+    <div className="security-principle" data-kv-reveal>
 
       <span className="security-principle-number">
         {number}

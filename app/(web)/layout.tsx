@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import { AuthButton } from "@/components/auth-button";
+import { MarketingMotion } from "@/components/marketing/marketing-motion";
+import "@/components/marketing/marketing-motion.css";
 import { MarketingNavigation } from "@/components/marketing/marketing-navigation";
 
 export default function MarketingLayout({
@@ -22,6 +24,7 @@ export default function MarketingLayout({
       {/* Fixed floating header must not cover page content. */}
       <div className="kv-site-header-spacer" aria-hidden="true" />
 
+      <MarketingMotion />
       {children}
 
       <footer className="border-t border-zinc-800">

@@ -1,0 +1,199 @@
+/* Shared KenvoryX secondary-page visual system.
+   Homepage hero and its original descending scan line are NOT touched. */
+.kv-marketing-shell .kv-subpage {
+  --kv-accent: 40, 169, 227;
+  position: relative;
+  isolation: isolate;
+  /* Extend the shared backdrop beneath the fixed navigation without moving content. */
+  margin-top: calc(-1 * var(--kv-header-offset, 102px));
+  padding-top: var(--kv-header-offset, 102px);
+  background: #05080d;
+}
+.kv-subpage.kv-subpage-security { --kv-accent: 47, 187, 158; }
+.kv-subpage.kv-subpage-about { --kv-accent: 88, 151, 230; }
+.kv-subpage-atmosphere {
+  /* A true viewport background, not a 980px-tall overlay that ends midway through the page. */
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  pointer-events: none;
+  overflow: hidden;
+}
+/* The legacy one-off page backgrounds are superseded by this shared full-screen layer. */
+.kv-subpage :is(.pricing-background,.security-background,.about-background) {
+  display: none;
+}
+/* Text and panels sit above the moving line; the global navigation has its own higher layer. */
+.kv-subpage > section {
+  position: relative;
+  z-index: 1;
+}
+.kv-subpage-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(190,225,246,.036) 1px, transparent 1px), linear-gradient(90deg,rgba(190,225,246,.036) 1px, transparent 1px);
+  background-size: 56px 56px;
+  /* Keep the grid visible across the ENTIRE viewport rather than fading at the fold. */
+  opacity: .86;
+  animation: kv-subpage-grid 26s linear infinite;
+}
+.kv-subpage-glow {
+  position: absolute;
+  width: min(45vw,560px);
+  aspect-ratio:1;
+  border-radius: 50%;
+  background: rgb(var(--kv-accent));
+  opacity: .10;
+  filter: blur(120px);
+  animation: kv-subpage-drift 15s ease-in-out infinite alternate;
+}
+.kv-subpage-glow-a { top: 0; right:-13%; }
+.kv-subpage-glow-b { top: 320px; left:-20%; opacity:.055; animation-delay:-7s; }
+.kv-subpage-scan {
+  position:absolute;
+  z-index: 0;
+  left:0;
+  top:8%;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(var(--kv-accent),.12) 15%,rgba(var(--kv-accent),.58) 50%,rgba(var(--kv-accent),.12) 85%,transparent);
+  box-shadow:0 0 19px rgba(var(--kv-accent),.19);
+  animation:kv-subpage-scan 9s ease-in-out infinite;
+}
+@keyframes kv-subpage-grid { to { background-position:56px 56px; } }
+@keyframes kv-subpage-drift { to { transform:translate3d(-55px,45px,0) scale(1.12); } }
+@keyframes kv-subpage-scan {
+  0% { top:0%;opacity:0; }
+  15%,85% { opacity:.9; }
+  100% { top:100%;opacity:0; }
+}
+/* Same hierarchy, spacing and restrained motion across secondary marketing pages. */
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) {
+  min-height:auto;
+  max-width:1120px;
+  padding:clamp(96px,12vw,164px) 24px clamp(80px,10vw,124px);
+}
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) :is(h1,p,[class$="-badge"]) {
+  position:relative;
+  animation:kv-subpage-hero-entrance .8s cubic-bezier(.2,.8,.2,1) both;
+}
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) h1 { animation-delay:.10s; }
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) p { animation-delay:.19s; }
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) h1 {
+  font-size:clamp(2.7rem,5vw,4.4rem);
+  line-height:1.07;
+  letter-spacing:-.055em;
+}
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) h1 span { color:#858e9d; }
+.kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) p { color:#9ca6b4; }
+@keyframes kv-subpage-hero-entrance {
+  from { opacity:0;transform:translateY(20px); }
+  to { opacity:1;transform:translateY(0); }
+}
+.kv-subpage :is(.features-container,.pricing-container,.security-container,.about-container) {
+  padding-top:14px;
+}
+.kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card,.security-main-card,.about-story,.enterprise-card,.security-principle,.features-cta,.pricing-bottom,.security-cta,.about-cta) {
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  box-shadow:0 15px 55px rgba(0,0,0,.12),inset 0 1px rgba(255,255,255,.025);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease,background .3s ease;
+}
+/* Solid surfaces obscure the scanning line as it travels BEHIND the boards.
+   The old translucent gradients let the grid and beam bleed through text. */
+.kv-marketing-shell .kv-subpage :is(
+  .feature-card,.pricing-card,.security-card,.about-card,
+  .security-main-card,.about-story,.enterprise-card
+) {
+  background: linear-gradient(145deg,#111821 0%,#0d131b 55%,#0b1017 100%);
+  border-color: rgba(164,186,207,.16);
+}
+.kv-marketing-shell .kv-subpage :is(
+  .domain-preview,.alerts-preview,.security-status-panel,.about-monitor-preview
+) {
+  background: #080d14;
+  border-color: rgba(164,186,207,.16);
+}
+.kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card,.security-main-card,.about-story,.enterprise-card):hover {
+  border-color:rgba(var(--kv-accent),.26);
+  box-shadow:0 22px 65px rgba(0,0,0,.22),0 0 32px rgba(var(--kv-accent),.045);
+}
+.kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card):hover { transform:translateY(-5px); }
+.kv-subpage :is(.domain-preview,.alerts-preview,.security-status-panel,.about-monitor-preview) {
+  border-color:rgba(157,185,211,.14);
+  box-shadow:0 16px 45px rgba(0,0,0,.2);
+  animation:kv-panel-breathe 7s ease-in-out infinite alternate;
+}
+@keyframes kv-panel-breathe {
+  to { box-shadow:0 20px 55px rgba(0,0,0,.3),0 0 22px rgba(var(--kv-accent),.05); }
+}
+.kv-subpage :is(.domain-preview-item,.alert-preview-item,.security-status-item,.about-preview-item) {
+  transition:background .25s ease,transform .25s ease;
+}
+.kv-subpage :is(.domain-preview-item,.alert-preview-item,.security-status-item,.about-preview-item):hover {
+  background:rgba(var(--kv-accent),.035);
+  transform:translateX(3px);
+}
+.kv-subpage :is(.status-dot.online,.security-status-dot,.about-online-dot) {
+  animation:kv-live-status 2.8s ease-in-out infinite;
+}
+@keyframes kv-live-status { 50% { box-shadow:0 0 0 5px rgba(34,197,94,.07),0 0 14px rgba(34,197,94,.3); } }
+.kv-subpage :is(.feature-icon,.pricing-plan-icon,.security-icon,.about-card-icon) {
+  transition:color .3s ease,border-color .3s ease,background .3s ease,transform .3s ease;
+}
+.kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card):hover :is(.feature-icon,.pricing-plan-icon,.security-icon,.about-card-icon) {
+  transform:translateY(-2px);
+  border-color:rgba(var(--kv-accent),.35);
+  background:rgba(var(--kv-accent),.12);
+}
+.kv-subpage .pricing-card-featured {
+  border-color:rgba(var(--kv-accent),.4);
+  background:radial-gradient(ellipse at 50% 0%,rgba(var(--kv-accent),.115),transparent 54%),linear-gradient(155deg,#111722,#090c12 78%);
+}
+.kv-subpage .pricing-card-featured:before {
+  content:"";position:absolute;top:0;left:15%;width:70%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--kv-accent),.8),transparent);
+  opacity:.7;pointer-events:none;
+}
+.kv-subpage :is(.features-cta,.pricing-bottom,.security-cta,.about-cta) {
+  background:radial-gradient(ellipse at 80% 40%,rgba(var(--kv-accent),.085),transparent 56%),#0a0e14;
+}
+.kv-subpage :is(.features-cta,.pricing-bottom,.security-cta,.about-cta) a {
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.kv-subpage :is(.features-cta,.pricing-bottom,.security-cta,.about-cta) a:hover {
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(0,0,0,.26);
+}
+.kv-subpage.kv-motion-ready [data-kv-reveal]:not(.kv-revealed) {
+  opacity:0;
+  transform:translate3d(0,24px,0);
+}
+.kv-subpage.kv-motion-ready [data-kv-reveal] {
+  transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1);
+  transition-delay:var(--kv-reveal-delay,0ms);
+}
+.kv-subpage.kv-motion-ready [data-kv-reveal].kv-revealed {
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+@media(max-width:700px) {
+  .kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) {padding:84px 20px 72px}
+  .kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) h1 {font-size:clamp(2.4rem,10vw,3.3rem);letter-spacing:-.045em}
+  .kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card,.security-main-card,.about-story) {box-shadow:none}
+  .kv-subpage :is(.features-cta,.pricing-bottom,.security-cta,.about-cta) {margin-left:20px;margin-right:20px;padding:32px 25px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .kv-subpage .kv-subpage-grid,.kv-subpage .kv-subpage-glow,.kv-subpage .kv-subpage-scan,
+  .kv-subpage :is(.domain-preview,.alerts-preview,.security-status-panel,.about-monitor-preview,.status-dot.online,.security-status-dot,.about-online-dot),
+  .kv-subpage :is(.features-hero,.pricing-hero,.security-hero,.about-hero) :is(h1,p,[class$="-badge"]) {
+    animation:none !important;
+  }
+  .kv-subpage [data-kv-reveal] {opacity:1 !important;transform:none !important;transition:none !important}
+  .kv-subpage :is(.feature-card,.pricing-card,.security-card,.about-card):hover,
+  .kv-subpage :is(.domain-preview-item,.alert-preview-item,.security-status-item,.about-preview-item):hover {transform:none}
+}
